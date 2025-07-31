@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 84% 4.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Show default cursor on interactive elements */
+  .cursor-default {
+    cursor: pointer !important;
+  }
+}
+
+@layer utilities {
+  .animated-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .animated-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 25% 25%,
+        hsl(var(--primary) / 0.15),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 75% 75%,
+        hsl(280 60% 50% / 0.15),
+        transparent 40%
+      );
+    animation: move-glow 20s linear infinite;
+    z-index: -1;
+  }
+  .noise-texture::after {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVAAAAEBAQODg5LS0tJSUl4eHhqampsbGxZWVk+Pj5GRkZMTExNTU1SUlKWlpaVlZVpaWphYWFua2tXd3d2dgz+AAAAGElEQVR42mJgBAIDAikaLpB4y5YtY2D4fAAYsQCEp3gI4wAAAABJRU5ErkJggg==");
+    animation: noise 4s steps(10) infinite;
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@keyframes move-glow {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(10vw, -10vh) scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes noise {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2%, -5%);
+  }
+  20% {
+    transform: translate(-8%, 2%);
+  }
+  30% {
+    transform: translate(3%, -12%);
+  }
+  40% {
+    transform: translate(-2%, 12%);
+  }
+  50% {
+    transform: translate(-8%, 5%);
+  }
+  60% {
+    transform: translate(8%, 0%);
+  }
+  70% {
+    transform: translate(0%, 8%);
+  }
+  80% {
+    transform: translate(12%, 18%);
+  }
+  90% {
+    transform: translate(-5%, 5%);
+  }
+}
