@@ -78,7 +78,7 @@ export function HeroSection() {
               </Button>
               <div className="flex items-center gap-4">
                 <motion.a
-                  href="https://github.com/OmarDGreat"
+                  href="https://github.com/OmarDaghestani"
                   target="_blank"
                   aria-label="GitHub"
                   whileHover={{

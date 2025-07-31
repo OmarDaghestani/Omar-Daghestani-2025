@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
-import { Textarea } from "./ui/textarea"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { Textarea } from "./ui/textarea";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 export function ContactSection() {
   const handleEmailClick = () => {
-    navigator.clipboard.writeText("omar.daghest@gmail.com")
-  }
+    navigator.clipboard.writeText("omar.daghest@gmail.com");
+  };
 
   const socialLinks = [
     {
       label: "GitHub",
-      url: "https://github.com/OmarDGreat",
+      url: "https://github.com/OmarDaghestani",
       icon: <Github className="h-6 w-6" />,
       color: "hover:text-primary",
     },
@@ -32,10 +32,13 @@ export function ContactSection() {
       color: "hover:text-primary",
       onClick: handleEmailClick,
     },
-  ]
+  ];
 
   return (
-    <section id="contact" className="w-full py-16 md:py-24 lg:py-32 bg-secondary/30">
+    <section
+      id="contact"
+      className="w-full py-16 md:py-24 lg:py-32 bg-secondary/30"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -48,7 +51,9 @@ export function ContactSection() {
             Get In <span className="text-primary">Touch</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            I'm always interested in new opportunities and exciting projects. Whether you have a question or just want to say hi, feel free to reach out!
+            I'm always interested in new opportunities and exciting projects.
+            Whether you have a question or just want to say hi, feel free to
+            reach out!
           </p>
         </motion.div>
 
@@ -99,7 +104,10 @@ export function ContactSection() {
                   />
                 </div>
                 <div className="text-center">
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Button
                       type="submit"
                       size="lg"
@@ -124,8 +132,9 @@ export function ContactSection() {
             <div>
               <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
               <p className="text-muted-foreground text-lg mb-8">
-                I'm always interested in new opportunities and exciting projects. 
-                Whether you have a question or just want to say hi, feel free to reach out!
+                I'm always interested in new opportunities and exciting
+                projects. Whether you have a question or just want to say hi,
+                feel free to reach out!
               </p>
             </div>
 
@@ -155,17 +164,26 @@ export function ContactSection() {
             <div className="space-y-4">
               <h4 className="text-xl font-semibold">Contact Details</h4>
               <div className="space-y-3">
-                <div className="flex items-center gap-3 cursor-default" onClick={handleEmailClick}>
+                <div
+                  className="flex items-center gap-3 cursor-default"
+                  onClick={handleEmailClick}
+                >
                   <Mail className="h-5 w-5 text-primary" />
-                  <span className="text-muted-foreground">omar.daghest@gmail.com</span>
+                  <span className="text-muted-foreground">
+                    omar.daghest@gmail.com
+                  </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Github className="h-5 w-5 text-primary" />
-                  <span className="text-muted-foreground">github.com/OmarDGreat</span>
+                  <span className="text-muted-foreground">
+                    github.com/OmarDaghestani
+                  </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Linkedin className="h-5 w-5 text-primary" />
-                  <span className="text-muted-foreground">linkedin.com/in/omar-daghestani</span>
+                  <span className="text-muted-foreground">
+                    linkedin.com/in/omar-daghestani
+                  </span>
                 </div>
               </div>
             </div>
@@ -173,5 +191,5 @@ export function ContactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

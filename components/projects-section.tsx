@@ -38,7 +38,7 @@ const projects = [
       "A comprehensive travel planning platform that helps users discover destinations, plan itineraries, and book experiences.",
     image: "/wanderQuest.png",
     tags: ["React", "Node.js", "MongoDB", "Express", "JWT", "REST API"],
-    githubUrl: "https://github.com/OmarDGreat/WanderQuest",
+    githubUrl: "https://github.com/OmarDaghestani/WanderQuest",
     liveUrl: "https://wanderquest-app.vercel.app",
     problem:
       "Travel planning is often fragmented across multiple platforms, making it difficult for users to organize their trips efficiently and discover new destinations.",
@@ -66,7 +66,7 @@ const projects = [
       "Prisma",
       "Tailwind CSS",
     ],
-    githubUrl: "https://github.com/OmarDGreat/ecommerce-platform",
+    githubUrl: "https://github.com/OmarDaghestani/ecommerce-platform",
     liveUrl: "https://ecommerce-platform-demo.vercel.app",
     problem:
       "Small businesses need a cost-effective, scalable e-commerce solution that provides enterprise-level features without the complexity of traditional platforms.",
@@ -88,7 +88,7 @@ const projects = [
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=450&fit=crop",
     tags: ["React", "Firebase", "Redux", "Material-UI", "Real-time", "PWA"],
-    githubUrl: "https://github.com/OmarDGreat/task-manager",
+    githubUrl: "https://github.com/OmarDaghestani/task-manager",
     liveUrl: "https://task-manager-demo.vercel.app",
     problem:
       "Teams struggle with task coordination and progress tracking, leading to missed deadlines and inefficient project management.",

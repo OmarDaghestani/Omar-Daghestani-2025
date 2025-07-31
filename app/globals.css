@@ -100,7 +100,7 @@
     width: 200%;
     height: 200%;
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVAAAAEBAQODg5LS0tJSUl4eHhqampsbGxZWVk+Pj5GRkZMTExNTU1SUlKWlpaVlZVpaWphYWFua2tXd3d2dgz+AAAAGElEQVR42mJgBAIDAikaLpB4y5YtY2D4fAAYsQCEp3gI4wAAAABJRU5ErkJggg==");
-    animation: noise 4s steps(10) infinite;
+    animation: noise 6s steps(10) infinite;
     opacity: 0.02;
     pointer-events: none;
     z-index: -1;
