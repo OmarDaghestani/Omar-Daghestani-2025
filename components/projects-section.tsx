@@ -148,9 +148,9 @@ export function ProjectsSection() {
             {projects.map((project, index) => (
               <CarouselItem
                 key={index}
-                className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
+                className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 h-full"
               >
-                <div className="p-1">
+                <div className="p-1 h-full">
                   <Dialog>
                     <DialogTrigger asChild>
                       <div
@@ -158,15 +158,15 @@ export function ProjectsSection() {
                         onMouseLeave={() => setVariant("default")}
                         className="cursor-default"
                       >
-                        <Card className="group overflow-hidden bg-card/50 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                          <CardContent className="p-0">
+                        <Card className="group overflow-hidden bg-card/50 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 project-card">
+                          <CardContent className="p-0 project-card-content">
                             <div className="relative overflow-hidden">
                               <Image
                                 src={project.image}
                                 alt={project.title}
                                 width={800}
                                 height={450}
-                                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
+                                className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                                 priority={index < 2}
                               />
                               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -176,21 +176,21 @@ export function ProjectsSection() {
                                 </div>
                               </div>
                             </div>
-                            <CardHeader>
+                            <CardHeader className="flex-1 flex flex-col">
                               <CardTitle className="text-xl font-bold truncate">
                                 {project.title}
                               </CardTitle>
-                              <CardDescription className="h-10 text-ellipsis overflow-hidden">
+                              <CardDescription className="project-card-description text-sm leading-relaxed">
                                 {project.description}
                               </CardDescription>
                             </CardHeader>
-                            <CardFooter>
+                            <CardFooter className="mt-auto">
                               <div className="flex flex-wrap gap-2">
                                 {project.tags.slice(0, 3).map((tag) => (
                                   <Badge
                                     key={tag}
                                     variant="secondary"
-                                    className="bg-primary/10 text-primary border-primary/20"
+                                    className="bg-primary/10 text-primary border-primary/20 text-xs"
                                   >
                                     {tag}
                                   </Badge>
