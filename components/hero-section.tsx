@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useContext } from "react";
+import { CursorContext } from "./cursor-context";
 
 const words = ["Hello,", "I'm", "Omar", "Daghestani"];
 
@@ -27,6 +29,8 @@ const itemVariants = {
 };
 
 export function HeroSection() {
+  const { setVariant } = useContext(CursorContext);
+
   return (
     <section id="home" className="w-full pt-20 md:pt-0">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,6 +77,8 @@ export function HeroSection() {
                 asChild
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_hsl(var(--primary))] cursor-default"
+                onMouseEnter={() => setVariant("hover")}
+                onMouseLeave={() => setVariant("default")}
               >
                 <Link href="#contact">Contact Me</Link>
               </Button>
@@ -89,6 +95,8 @@ export function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                   rel="noreferrer"
                   className="text-muted-foreground cursor-default"
+                  onMouseEnter={() => setVariant("hover")}
+                  onMouseLeave={() => setVariant("default")}
                 >
                   <Github className="h-8 w-8" />
                 </motion.a>
@@ -104,6 +112,8 @@ export function HeroSection() {
                   whileTap={{ scale: 0.95 }}
                   rel="noreferrer"
                   className="text-muted-foreground cursor-default"
+                  onMouseEnter={() => setVariant("hover")}
+                  onMouseLeave={() => setVariant("default")}
                 >
                   <Linkedin className="h-8 w-8" />
                 </motion.a>
@@ -117,6 +127,8 @@ export function HeroSection() {
                   }}
                   whileTap={{ scale: 0.95 }}
                   className="text-muted-foreground cursor-default"
+                  onMouseEnter={() => setVariant("hover")}
+                  onMouseLeave={() => setVariant("default")}
                 >
                   <Mail className="h-8 w-8" />
                 </motion.a>
@@ -132,6 +144,8 @@ export function HeroSection() {
               className="relative rounded-full p-1 cursor-default"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              onMouseEnter={() => setVariant("hover")}
+              onMouseLeave={() => setVariant("default")}
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 animate-spin [animation-duration:4s]" />
               <Image

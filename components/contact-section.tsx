@@ -6,8 +6,12 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useContext } from "react";
+import { CursorContext } from "./cursor-context";
 
 export function ContactSection() {
+  const { setVariant } = useContext(CursorContext);
+
   const handleEmailClick = () => {
     navigator.clipboard.writeText("omar.daghest@gmail.com");
   };
@@ -112,6 +116,8 @@ export function ContactSection() {
                       type="submit"
                       size="lg"
                       className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/30 transition-shadow duration-300 hover:shadow-[0_0_30px_hsl(var(--primary))] cursor-default"
+                      onMouseEnter={() => setVariant("hover")}
+                      onMouseLeave={() => setVariant("default")}
                     >
                       Send Message
                     </Button>
@@ -153,6 +159,8 @@ export function ContactSection() {
                     whileTap={{ scale: 0.9 }}
                     className={`p-3 rounded-full bg-white/5 border border-white/10 text-muted-foreground transition-colors duration-300 cursor-default ${link.color}`}
                     aria-label={link.label}
+                    onMouseEnter={() => setVariant("hover")}
+                    onMouseLeave={() => setVariant("default")}
                   >
                     {link.icon}
                   </motion.a>
@@ -167,6 +175,8 @@ export function ContactSection() {
                 <div
                   className="flex items-center gap-3 cursor-default"
                   onClick={handleEmailClick}
+                  onMouseEnter={() => setVariant("hover")}
+                  onMouseLeave={() => setVariant("default")}
                 >
                   <Mail className="h-5 w-5 text-primary" />
                   <span className="text-muted-foreground">

@@ -58,10 +58,42 @@
   html {
     scroll-behavior: smooth;
   }
-  
-  /* Show default cursor on interactive elements */
+
+  /* Hide default cursor on interactive elements when custom cursor is active */
   .cursor-default {
-    cursor: pointer !important;
+    cursor: none !important;
+  }
+
+  /* Ensure all clickable elements hide the default cursor */
+  button,
+  a,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  [class*="cursor-default"],
+  [class*="cursor-pointer"] {
+    cursor: none !important;
+  }
+
+  /* Hide cursor on any element with hover states */
+  *:hover {
+    cursor: none !important;
+  }
+
+  /* Ensure no default cursor shows anywhere when custom cursor is active */
+  * {
+    cursor: none !important;
+  }
+
+  /* Only show default cursor on mobile devices where custom cursor is hidden */
+  @media (max-width: 767px) {
+    * {
+      cursor: auto !important;
+    }
+    .cursor-default {
+      cursor: pointer !important;
+    }
   }
 }
 
