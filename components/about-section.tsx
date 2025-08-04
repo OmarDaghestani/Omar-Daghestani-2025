@@ -86,8 +86,30 @@ export function AboutSection() {
               onMouseEnter={() => setVariant("hover")}
               onMouseLeave={() => setVariant("default")}
             >
-              <Button asChild size="lg" className="mt-4 cursor-default">
-                <Link href="#contact">Let's Connect</Link>
+              <Button
+                size="lg"
+                className="mt-4 cursor-default"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector("#contact");
+                  if (element) {
+                    document.documentElement.setAttribute(
+                      "data-smooth-scroll",
+                      "true"
+                    );
+                    element.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                    setTimeout(() => {
+                      document.documentElement.removeAttribute(
+                        "data-smooth-scroll"
+                      );
+                    }, 1000);
+                  }
+                }}
+              >
+                Let's Connect
               </Button>
             </motion.div>
           </div>

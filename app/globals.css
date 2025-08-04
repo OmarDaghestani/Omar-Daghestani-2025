@@ -56,6 +56,16 @@
     overflow-x: hidden;
   }
   html {
+    scroll-padding-top: 5rem; /* Account for fixed header */
+  }
+
+  /* Ensure anchor links scroll to the right position */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  /* Apply smooth scrolling only to navigation links */
+  html[data-smooth-scroll="true"] {
     scroll-behavior: smooth;
   }
 

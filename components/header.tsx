@@ -27,6 +27,31 @@ export function Header() {
     { href: "#contact", label: "Contact" },
   ];
 
+  const handleNavLinkClick = (e: React.MouseEvent, href: string) => {
+    // Prevent default link behavior
+    e.preventDefault();
+
+    // Close mobile menu if open
+    setIsMenuOpen(false);
+
+    // Temporarily enable smooth scrolling
+    document.documentElement.setAttribute("data-smooth-scroll", "true");
+
+    // Smooth scroll to section
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      // Disable smooth scrolling after animation completes
+      setTimeout(() => {
+        document.documentElement.removeAttribute("data-smooth-scroll");
+      }, 1000);
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -37,8 +62,8 @@ export function Header() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link
-            href="#home"
+          <button
+            onClick={(e) => handleNavLinkClick(e, "#home")}
             className="flex items-center gap-2 text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-default"
             onMouseEnter={() => setVariant("hover")}
             onMouseLeave={() => setVariant("default")}
@@ -47,19 +72,19 @@ export function Header() {
             <span className="[text-shadow:0_0_8px_hsl(var(--primary))]">
               Omar Daghestani
             </span>
-          </Link>
+          </button>
 
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Link
+              <button
                 key={link.href}
-                href={link.href}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
                 className="relative text-lg font-medium text-muted-foreground hover:text-primary transition-colors px-4 py-2 rounded-md cursor-default"
                 onMouseEnter={() => setVariant("hover")}
                 onMouseLeave={() => setVariant("default")}
               >
                 {link.label}
-              </Link>
+              </button>
             ))}
           </nav>
 
@@ -100,16 +125,15 @@ export function Header() {
         <div className="md:hidden bg-background/95">
           <nav className="flex flex-col items-center gap-6 py-8">
             {navLinks.map((link) => (
-              <Link
+              <button
                 key={link.href}
-                href={link.href}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
                 className="text-xl font-medium text-muted-foreground hover:text-primary transition-colors cursor-default"
-                onClick={() => setIsMenuOpen(false)}
                 onMouseEnter={() => setVariant("hover")}
                 onMouseLeave={() => setVariant("default")}
               >
                 {link.label}
-              </Link>
+              </button>
             ))}
             <Button
               asChild

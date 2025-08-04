@@ -3,13 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Header } from "@/components/header";
-import { HeroSection } from "@/components/hero-section";
-import { AboutSection } from "@/components/about-section";
-import { SkillsSection } from "@/components/skills-section";
-import { ProjectsSection } from "@/components/projects-section";
-import { ContactSection } from "@/components/contact-section";
-import { Footer } from "@/components/footer";
 import { CustomCursor } from "@/components/custom-cursor";
 import { CursorProvider } from "@/components/cursor-context";
 import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator";
@@ -39,15 +32,7 @@ export default function RootLayout({
           <div className="animated-background noise-texture">
             <CustomCursor />
             <ScrollProgressIndicator />
-            <Header />
-            <main>
-              <HeroSection />
-              <AboutSection />
-              <SkillsSection />
-              <ProjectsSection />
-              <ContactSection />
-            </main>
-            <Footer />
+            {children}
           </div>
         </CursorProvider>
       </body>

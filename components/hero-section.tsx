@@ -74,13 +74,31 @@ export function HeroSection() {
               variants={itemVariants}
             >
               <Button
-                asChild
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_hsl(var(--primary))] cursor-default"
                 onMouseEnter={() => setVariant("hover")}
                 onMouseLeave={() => setVariant("default")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector("#contact");
+                  if (element) {
+                    document.documentElement.setAttribute(
+                      "data-smooth-scroll",
+                      "true"
+                    );
+                    element.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                    setTimeout(() => {
+                      document.documentElement.removeAttribute(
+                        "data-smooth-scroll"
+                      );
+                    }, 1000);
+                  }
+                }}
               >
-                <Link href="#contact">Contact Me</Link>
+                Contact Me
               </Button>
               <div className="flex items-center gap-4">
                 <motion.a
