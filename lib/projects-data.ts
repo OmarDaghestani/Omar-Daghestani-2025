@@ -19,7 +19,7 @@ export const projects: Project[] = [
     image: "/wanderQuest.png",
     tags: ["React", "Node.js", "MongoDB", "Express", "JWT", "REST API"],
     githubUrl: "https://github.com/OmarDaghestani/WanderQuest",
-    liveUrl: "https://wanderquest-app.vercel.app",
+    liveUrl: "https://wanderquest.omar-daghestani.com",
     problem:
       "Travel planning is often fragmented across multiple platforms, making it difficult for users to organize their trips efficiently and discover new destinations.",
     role: "Full-stack developer responsible for designing the user interface, implementing the backend API, and integrating third-party services for location data and booking functionality.",
@@ -47,7 +47,7 @@ export const projects: Project[] = [
       "Tailwind CSS",
     ],
     githubUrl: "https://github.com/OmarDaghestani/ecommerce-platform",
-    liveUrl: "https://ecommerce-platform-demo.vercel.app",
+    liveUrl: "https://ecom.omar-daghestani.com/",
     problem:
       "Small businesses need a cost-effective, scalable e-commerce solution that provides enterprise-level features without the complexity of traditional platforms.",
     role: "Lead developer focused on creating a scalable architecture, implementing secure payment processing, and building an intuitive admin interface for product and order management.",
