@@ -8,29 +8,18 @@ import {
   Wind,
   Type,
   Server,
-  Bot,
   Globe,
-  Shield,
-  Zap,
-  Cpu,
   Palette,
   Cloud,
   Star,
   Info,
   Layers,
-  FileCode,
-  FileText,
   GitBranch,
   Github,
   Package,
   Container,
   Flame,
-  Box,
-  Terminal,
-  Settings,
-  Monitor,
-  Smartphone,
-  Layout,
+  Zap,
 } from "lucide-react";
 import { skillCategories } from "@/lib/skills-data";
 import { SectionWrapper } from "./section-wrapper";
@@ -69,27 +58,16 @@ const iconMap = {
   wind: Wind,
   type: Type,
   server: Server,
-  bot: Bot,
   globe: Globe,
-  shield: Shield,
-  zap: Zap,
-  cpu: Cpu,
   palette: Palette,
   cloud: Cloud,
   layers: Layers,
-  fileCode: FileCode,
-  fileText: FileText,
   gitBranch: GitBranch,
   github: Github,
   package: Package,
   container: Container,
   flame: Flame,
-  box: Box,
-  terminal: Terminal,
-  settings: Settings,
-  monitor: Monitor,
-  smartphone: Smartphone,
-  layout: Layout,
+  zap: Zap,
 };
 
 const proficiencyColors = {
@@ -114,20 +92,30 @@ export function SkillsSection() {
 
   // Filter skills based on selected criteria
   const filteredCategories = useMemo(() => {
-    return skillCategories
-      .map((category) => ({
-        ...category,
-        skills: category.skills.filter((skill) => {
+    const result = skillCategories
+      .map((category) => {
+        const filteredSkills = category.skills.filter((skill) => {
+          // Check proficiency filter
           const matchesProficiency =
             selectedProficiency === "all" ||
             skill.proficiency === selectedProficiency;
+
+          // Check category filter
           const matchesCategory =
             selectedCategory === null || category.title === selectedCategory;
+
           return matchesProficiency && matchesCategory;
-        }),
-      }))
+        });
+
+        return {
+          ...category,
+          skills: filteredSkills,
+        };
+      })
       .filter((category) => category.skills.length > 0)
       .sort((a, b) => a.priority - b.priority);
+
+    return result;
   }, [selectedProficiency, selectedCategory]);
 
   const categories = skillCategories.map(({ title, icon }) => ({
@@ -154,15 +142,15 @@ export function SkillsSection() {
 
       <TooltipProvider>
         <div className="space-y-12">
-          {filteredCategories.map((category, categoryIndex) => {
-            const CategoryIcon = iconMap[category.icon as keyof typeof iconMap];
+          {filteredCategories.map((category) => {
+            const CategoryIcon =
+              iconMap[category.icon as keyof typeof iconMap] || Code; // Fallback to Code icon
 
             return (
               <motion.div
                 key={category.title}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
+                animate="visible"
                 variants={containerVariants}
                 className="space-y-6"
               >
@@ -192,7 +180,7 @@ export function SkillsSection() {
                 >
                   {category.skills.map((skill) => {
                     const IconComponent =
-                      iconMap[skill.icon as keyof typeof iconMap];
+                      iconMap[skill.icon as keyof typeof iconMap] || Code; // Fallback to Code icon
                     const isSelected = selectedSkill === skill.name;
 
                     return (

@@ -1,32 +1,3 @@
-import {
-  Code,
-  Database,
-  Wind,
-  Type,
-  Server,
-  Bot,
-  Globe,
-  Shield,
-  Zap,
-  Cpu,
-  Palette,
-  Cloud,
-  Layers,
-  FileCode,
-  FileText,
-  GitBranch,
-  Github,
-  Package,
-  Container,
-  Flame,
-  Box,
-  Terminal,
-  Settings,
-  Monitor,
-  Smartphone,
-  Layout,
-} from "lucide-react";
-
 export interface Skill {
   name: string;
   icon: string;
