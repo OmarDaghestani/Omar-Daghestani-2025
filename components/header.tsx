@@ -1,55 +1,22 @@
 "use client";
 
-import { useState, useEffect, useContext } from "react";
-import Link from "next/link";
+import { useState, useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Code } from "lucide-react";
 import { CursorContext } from "./cursor-context";
+import { useScroll } from "@/hooks/use-scroll";
+import { NAVIGATION_LINKS, RESUME_URL } from "@/lib/constants";
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setVariant } = useContext(CursorContext);
+  const { isScrolled, handleNavLinkClick } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
+  const handleMenuClose = () => setIsMenuOpen(false);
 
-  const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
-  ];
-
-  const handleNavLinkClick = (e: React.MouseEvent, href: string) => {
-    // Prevent default link behavior
-    e.preventDefault();
-
-    // Close mobile menu if open
-    setIsMenuOpen(false);
-
-    // Temporarily enable smooth scrolling
-    document.documentElement.setAttribute("data-smooth-scroll", "true");
-
-    // Smooth scroll to section
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-
-      // Disable smooth scrolling after animation completes
-      setTimeout(() => {
-        document.documentElement.removeAttribute("data-smooth-scroll");
-      }, 1000);
-    }
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    handleNavLinkClick(e, href, handleMenuClose);
   };
 
   return (
@@ -62,8 +29,9 @@ export function Header() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
+          {/* Logo */}
           <button
-            onClick={(e) => handleNavLinkClick(e, "#home")}
+            onClick={(e) => handleNavClick(e, "#home")}
             className="flex items-center gap-2 text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-default"
             onMouseEnter={() => setVariant("hover")}
             onMouseLeave={() => setVariant("default")}
@@ -74,11 +42,12 @@ export function Header() {
             </span>
           </button>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {NAVIGATION_LINKS.map((link) => (
               <button
                 key={link.href}
-                onClick={(e) => handleNavLinkClick(e, link.href)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="relative text-lg font-medium text-muted-foreground hover:text-primary transition-colors px-4 py-2 rounded-md cursor-default"
                 onMouseEnter={() => setVariant("hover")}
                 onMouseLeave={() => setVariant("default")}
@@ -88,6 +57,7 @@ export function Header() {
             ))}
           </nav>
 
+          {/* Download CV Button */}
           <div className="hidden md:block">
             <Button
               asChild
@@ -96,15 +66,16 @@ export function Header() {
               onMouseEnter={() => setVariant("hover")}
               onMouseLeave={() => setVariant("default")}
             >
-              <a href="/Omar-Daghestani-Resume-2025.pdf" download>
+              <a href={RESUME_URL} download>
                 Download CV
               </a>
             </Button>
           </div>
 
+          {/* Mobile Menu Toggle */}
           <div className="md:hidden">
             <Button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={handleMenuToggle}
               variant="ghost"
               size="icon"
               className="cursor-default"
@@ -121,13 +92,14 @@ export function Header() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-background/95">
           <nav className="flex flex-col items-center gap-6 py-8">
-            {navLinks.map((link) => (
+            {NAVIGATION_LINKS.map((link) => (
               <button
                 key={link.href}
-                onClick={(e) => handleNavLinkClick(e, link.href)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="text-xl font-medium text-muted-foreground hover:text-primary transition-colors cursor-default"
                 onMouseEnter={() => setVariant("hover")}
                 onMouseLeave={() => setVariant("default")}
@@ -141,7 +113,7 @@ export function Header() {
               onMouseEnter={() => setVariant("hover")}
               onMouseLeave={() => setVariant("default")}
             >
-              <a href="/Omar-Daghestani-Resume-2025.pdf" download>
+              <a href={RESUME_URL} download>
                 Download CV
               </a>
             </Button>

@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "./ui/button";
-import { Github, Linkedin, Mail } from "lucide-react";
 import { useContext } from "react";
 import { CursorContext } from "./cursor-context";
+import { scrollToSection } from "@/lib/scroll-utils";
+import { SocialLinks } from "./social-links";
 
 const words = ["Hello,", "I'm", "Omar", "Daghestani"];
 
@@ -30,6 +30,10 @@ const itemVariants = {
 
 export function HeroSection() {
   const { setVariant } = useContext(CursorContext);
+
+  const handleContactClick = () => {
+    scrollToSection("#contact");
+  };
 
   return (
     <section id="home" className="w-full pt-20 md:pt-0">
@@ -78,79 +82,11 @@ export function HeroSection() {
                 className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_hsl(var(--primary))] cursor-default"
                 onMouseEnter={() => setVariant("hover")}
                 onMouseLeave={() => setVariant("default")}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const element = document.querySelector("#contact");
-                  if (element) {
-                    document.documentElement.setAttribute(
-                      "data-smooth-scroll",
-                      "true"
-                    );
-                    element.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                    setTimeout(() => {
-                      document.documentElement.removeAttribute(
-                        "data-smooth-scroll"
-                      );
-                    }, 1000);
-                  }
-                }}
+                onClick={handleContactClick}
               >
                 Contact Me
               </Button>
-              <div className="flex items-center gap-4">
-                <motion.a
-                  href="https://github.com/OmarDaghestani"
-                  target="_blank"
-                  aria-label="GitHub"
-                  whileHover={{
-                    scale: 1.1,
-                    y: -2,
-                    color: "hsl(var(--primary))",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  rel="noreferrer"
-                  className="text-muted-foreground cursor-default"
-                  onMouseEnter={() => setVariant("hover")}
-                  onMouseLeave={() => setVariant("default")}
-                >
-                  <Github className="h-8 w-8" />
-                </motion.a>
-                <motion.a
-                  href="https://linkedin.com/in/omar-daghestani"
-                  target="_blank"
-                  aria-label="LinkedIn"
-                  whileHover={{
-                    scale: 1.1,
-                    y: -2,
-                    color: "hsl(var(--primary))",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  rel="noreferrer"
-                  className="text-muted-foreground cursor-default"
-                  onMouseEnter={() => setVariant("hover")}
-                  onMouseLeave={() => setVariant("default")}
-                >
-                  <Linkedin className="h-8 w-8" />
-                </motion.a>
-                <motion.a
-                  href="mailto:omar.daghest@gmail.com"
-                  aria-label="Email"
-                  whileHover={{
-                    scale: 1.1,
-                    y: -2,
-                    color: "hsl(var(--primary))",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="text-muted-foreground cursor-default"
-                  onMouseEnter={() => setVariant("hover")}
-                  onMouseLeave={() => setVariant("default")}
-                >
-                  <Mail className="h-8 w-8" />
-                </motion.a>
-              </div>
+              <SocialLinks />
             </motion.div>
           </div>
           <motion.div
