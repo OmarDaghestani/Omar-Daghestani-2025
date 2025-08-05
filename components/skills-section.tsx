@@ -1,26 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState, useMemo, useCallback, memo } from "react";
-import {
-  Code,
-  Database,
-  Wind,
-  Type,
-  Server,
-  Globe,
-  Palette,
-  Cloud,
-  Star,
-  Info,
-  Layers,
-  GitBranch,
-  Github,
-  Package,
-  Container,
-  Flame,
-  Zap,
-} from "lucide-react";
+import { skillIcons, uiIcons } from "@/lib/icon-utils";
 import { skillCategories } from "@/lib/skills-data";
 import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
@@ -33,25 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 20, scale: 0.8, opacity: 0 },
-  visible: {
-    y: 0,
-    scale: 1,
-    opacity: 1,
-  },
-};
+import { motion, staggerContainer, staggerItem, hoverScale } from "@/lib/motion-utils";
 
 const proficiencyColors = {
   beginner: "text-green-400",
@@ -72,28 +35,6 @@ export const SkillsSection = memo(function SkillsSection() {
   const [selectedProficiency, setSelectedProficiency] =
     useState<ProficiencyFilter>("all");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  // Memoized icon map for better performance
-  const iconMap = useMemo(
-    () => ({
-      code: Code,
-      database: Database,
-      wind: Wind,
-      type: Type,
-      server: Server,
-      globe: Globe,
-      palette: Palette,
-      cloud: Cloud,
-      layers: Layers,
-      gitBranch: GitBranch,
-      github: Github,
-      package: Package,
-      container: Container,
-      flame: Flame,
-      zap: Zap,
-    }),
-    []
-  );
 
   // Memoized event handlers
   const handleSkillSelect = useCallback(
@@ -190,14 +131,14 @@ export const SkillsSection = memo(function SkillsSection() {
         <div className="space-y-8">
           {filteredCategories.map((category) => {
             const CategoryIcon =
-              iconMap[category.icon as keyof typeof iconMap] || Code; // Fallback to Code icon
+              skillIcons[category.icon as keyof typeof skillIcons] || skillIcons.code; // Fallback to Code icon
 
             return (
               <motion.div
                 key={category.title}
                 initial="hidden"
                 animate="visible"
-                variants={containerVariants}
+                variants={staggerContainer}
                 className="space-y-4"
               >
                 {/* Category Header */}
@@ -222,11 +163,11 @@ export const SkillsSection = memo(function SkillsSection() {
                 {/* Responsive Grid Layout */}
                 <motion.div
                   className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
-                  variants={containerVariants}
+                  variants={staggerContainer}
                 >
                   {category.skills.map((skill) => {
                     const IconComponent =
-                      iconMap[skill.icon as keyof typeof iconMap] || Code; // Fallback to Code icon
+                      skillIcons[skill.icon as keyof typeof skillIcons] || skillIcons.code; // Fallback to Code icon
                     const isSelected = selectedSkill === skill.name;
 
                     return (
@@ -242,18 +183,14 @@ export const SkillsSection = memo(function SkillsSection() {
                                 ? "border-primary bg-primary/10 scale-105"
                                 : "hover:border-primary/30 hover:bg-primary/5"
                             }`}
-                            variants={itemVariants}
-                            whileHover={{
-                              scale: 1.05,
-                              y: -2,
-                              transition: { duration: 0.2 },
-                            }}
+                            variants={staggerItem}
+                            whileHover={hoverScale}
                             onClick={() => handleSkillSelect(skill.name)}
                           >
                             {/* Highlighted indicator */}
                             {skill.isHighlighted && (
                               <div className="absolute -top-1 -right-1">
-                                <Star className="w-3 h-3 text-primary fill-primary" />
+                                <uiIcons.star className="w-3 h-3 text-primary fill-primary" />
                               </div>
                             )}
 
@@ -292,7 +229,7 @@ export const SkillsSection = memo(function SkillsSection() {
                             {/* Info icon for description */}
                             {skill.description && (
                               <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <Info className="w-2.5 h-2.5 text-muted-foreground" />
+                                <uiIcons.info className="w-2.5 h-2.5 text-muted-foreground" />
                               </div>
                             )}
                           </motion.div>
