@@ -280,7 +280,9 @@ export function SkillsSection() {
                         </TooltipTrigger>
                         <TooltipContent side="top" className="max-w-xs">
                           <div className="space-y-2">
-                            <h4 className="font-semibold text-sm">{skill.name}</h4>
+                            <h4 className="font-semibold text-sm">
+                              {skill.name}
+                            </h4>
                             {skill.description && (
                               <p className="text-xs text-muted-foreground">
                                 {skill.description}

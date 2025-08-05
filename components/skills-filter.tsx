@@ -47,7 +47,9 @@ export function SkillsFilter({
       {/* Compact Filter Header */}
       <div className="flex items-center justify-center gap-2">
         <Filter className="w-4 h-4 text-primary" />
-        <h3 className="text-base font-semibold text-foreground">Filter Skills</h3>
+        <h3 className="text-base font-semibold text-foreground">
+          Filter Skills
+        </h3>
         {hasActiveFilters && (
           <motion.div
             initial={{ scale: 0 }}
