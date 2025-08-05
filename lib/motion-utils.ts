@@ -61,4 +61,4 @@ export const hoverLift = {
 };
 
 // Export motion components for consistent usage
-export { motion, AnimatePresence }; 
+export { motion, AnimatePresence };

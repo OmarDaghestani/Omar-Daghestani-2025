@@ -19,6 +19,7 @@ A modern, high-performance portfolio website built with Next.js, TypeScript, and
 ## 🛠 Tech Stack
 
 ### Core Technologies
+
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS with custom design system
@@ -26,6 +27,7 @@ A modern, high-performance portfolio website built with Next.js, TypeScript, and
 - **Icons**: Lucide React with optimized imports
 
 ### Performance & Optimization
+
 - **Bundle Analysis**: @next/bundle-analyzer
 - **Code Splitting**: Dynamic imports and lazy loading
 - **Tree Shaking**: Optimized imports and dead code elimination
@@ -33,6 +35,7 @@ A modern, high-performance portfolio website built with Next.js, TypeScript, and
 - **Font Optimization**: Google Fonts with display swap
 
 ### UI Components
+
 - **Custom Components**: Built with class-variance-authority
 - **Radix UI**: Accessible primitives for tooltips and dialogs
 - **Embla Carousel**: Smooth project carousel
@@ -42,23 +45,26 @@ A modern, high-performance portfolio website built with Next.js, TypeScript, and
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/OmarDaghestani/Omar-Daghestani-2025.git
 cd Omar-Daghestani-2025
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp .env.example .env.local
 # Add your Formspree endpoint
@@ -66,6 +72,7 @@ NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
 ```
 
 4. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -113,17 +120,20 @@ npm run dev
 ## ⚡ Performance Optimizations
 
 ### Bundle Optimization
+
 - **Tree Shaking**: Enabled for all dependencies
 - **Code Splitting**: Lazy loading for non-critical components
 - **Bundle Analysis**: Integrated bundle analyzer for monitoring
 - **Optimized Imports**: Centralized icon and motion utilities
 
 ### Webpack Configuration
+
 - **Chunk Splitting**: Separate chunks for Framer Motion, UI libraries, and commons
 - **Module Resolution**: Optimized for better deduplication
 - **Compression**: Enabled for production builds
 
 ### Image & Font Optimization
+
 - **Next.js Image**: Automatic optimization with WebP/AVIF
 - **Font Display**: Swap for better loading performance
 - **Preconnect**: Optimized font loading
@@ -131,29 +141,35 @@ npm run dev
 ## 🎨 Customization
 
 ### Personal Information
+
 Update the following files with your information:
 
 #### Core Information
+
 - `app/layout.tsx` - Update metadata and SEO information
 - `components/hero-section.tsx` - Update hero content and name
 - `components/about-section.tsx` - Update about content
 - `lib/constants.ts` - Update resume URL and contact links
 
 #### Skills & Projects
+
 - `lib/skills-data.ts` - Update skills, proficiency levels, and categories
 - `lib/projects-data.ts` - Update projects, descriptions, and links
 
 #### Contact Information
+
 - `components/contact-section.tsx` - Update contact form
 - `components/footer.tsx` - Update social links
 - `.env.local` - Update Formspree endpoint
 
 ### Styling & Theme
+
 - **Colors**: Update CSS variables in `app/globals.css`
 - **Tailwind**: Modify `tailwind.config.ts` for custom design tokens
 - **Animations**: Customize motion variants in `lib/motion-utils.ts`
 
 ### Assets
+
 - **Resume**: Replace `public/Omar-Daghestani-Resume-2025.pdf`
 - **Images**: Add project images to `public/project-images/`
 - **Icons**: Update icon mappings in `lib/icon-utils.ts`
@@ -161,13 +177,16 @@ Update the following files with your information:
 ## 📊 Performance Monitoring
 
 ### Bundle Analysis
+
 ```bash
 # Generate bundle analysis report
 ANALYZE=true npm run build
 ```
 
 ### Core Web Vitals
+
 The portfolio includes built-in performance monitoring for:
+
 - **LCP** (Largest Contentful Paint)
 - **FID** (First Input Delay)
 - **CLS** (Cumulative Layout Shift)
@@ -175,18 +194,22 @@ The portfolio includes built-in performance monitoring for:
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 1. Push your code to GitHub
 2. Connect your repository to Vercel
 3. Add environment variables in Vercel dashboard
 4. Deploy automatically
 
 ### Environment Variables
+
 ```bash
 NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
 ```
 
 ### Other Platforms
+
 The app can be deployed to any platform that supports Next.js:
+
 - **Netlify**: Automatic deployment with build hooks
 - **Railway**: Container-based deployment
 - **DigitalOcean App Platform**: Managed deployment
@@ -203,11 +226,13 @@ The app can be deployed to any platform that supports Next.js:
 ## 🔧 Development
 
 ### Code Quality
+
 - **TypeScript**: Strict type checking enabled
 - **ESLint**: Configured for Next.js and React
 - **Prettier**: Code formatting (if configured)
 
 ### Performance Guidelines
+
 - Use lazy loading for non-critical components
 - Optimize images with Next.js Image component
 - Minimize bundle size with tree shaking
@@ -234,4 +259,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Built with ❤️ using Next.js, TypeScript, and Tailwind CSS** 
+**Built with ❤️ using Next.js, TypeScript, and Tailwind CSS**

@@ -14,7 +14,12 @@ import {
 } from "@/components/ui/tooltip";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { motion, staggerContainer, staggerItem, hoverScale } from "@/lib/motion-utils";
+import {
+  motion,
+  staggerContainer,
+  staggerItem,
+  hoverScale,
+} from "@/lib/motion-utils";
 
 const proficiencyColors = {
   beginner: "text-green-400",
@@ -131,7 +136,8 @@ export const SkillsSection = memo(function SkillsSection() {
         <div className="space-y-8">
           {filteredCategories.map((category) => {
             const CategoryIcon =
-              skillIcons[category.icon as keyof typeof skillIcons] || skillIcons.code; // Fallback to Code icon
+              skillIcons[category.icon as keyof typeof skillIcons] ||
+              skillIcons.code; // Fallback to Code icon
 
             return (
               <motion.div
@@ -167,7 +173,8 @@ export const SkillsSection = memo(function SkillsSection() {
                 >
                   {category.skills.map((skill) => {
                     const IconComponent =
-                      skillIcons[skill.icon as keyof typeof skillIcons] || skillIcons.code; // Fallback to Code icon
+                      skillIcons[skill.icon as keyof typeof skillIcons] ||
+                      skillIcons.code; // Fallback to Code icon
                     const isSelected = selectedSkill === skill.name;
 
                     return (
