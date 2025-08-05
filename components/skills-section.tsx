@@ -32,6 +32,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -89,12 +90,20 @@ export function SkillsSection() {
   const [selectedProficiency, setSelectedProficiency] =
     useState<ProficiencyFilter>("all");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Filter skills based on selected criteria
   const filteredCategories = useMemo(() => {
     const result = skillCategories
       .map((category) => {
         const filteredSkills = category.skills.filter((skill) => {
+          // Check search query
+          const matchesSearch =
+            searchQuery.trim() === "" ||
+            skill.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            skill.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            category.title.toLowerCase().includes(searchQuery.toLowerCase());
+
           // Check proficiency filter
           const matchesProficiency =
             selectedProficiency === "all" ||
@@ -104,7 +113,7 @@ export function SkillsSection() {
           const matchesCategory =
             selectedCategory === null || category.title === selectedCategory;
 
-          return matchesProficiency && matchesCategory;
+          return matchesSearch && matchesProficiency && matchesCategory;
         });
 
         return {
@@ -116,7 +125,12 @@ export function SkillsSection() {
       .sort((a, b) => a.priority - b.priority);
 
     return result;
-  }, [selectedProficiency, selectedCategory]);
+  }, [selectedProficiency, selectedCategory, searchQuery]);
+
+  // Calculate total skills
+  const totalSkills = useMemo(() => {
+    return filteredCategories.reduce((total, category) => total + category.skills.length, 0);
+  }, [filteredCategories]);
 
   const categories = skillCategories.map(({ title, icon }) => ({
     title,
@@ -136,9 +150,32 @@ export function SkillsSection() {
           onProficiencyChange={setSelectedProficiency}
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
           categories={categories}
         />
       </div>
+
+      {/* Skills Summary */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-8"
+      >
+        <div className="flex items-center justify-center gap-4 flex-wrap">
+          <Badge variant="outline" className="px-4 py-2 text-sm">
+            {totalSkills} skills displayed
+          </Badge>
+          <Badge variant="outline" className="px-4 py-2 text-sm">
+            {filteredCategories.length} categories
+          </Badge>
+          {searchQuery.trim() !== "" && (
+            <Badge variant="secondary" className="px-4 py-2 text-sm">
+              Searching: &quot;{searchQuery}&quot;
+            </Badge>
+          )}
+        </div>
+      </motion.div>
 
       <TooltipProvider>
         <div className="space-y-12">
@@ -175,7 +212,7 @@ export function SkillsSection() {
 
                 {/* Responsive Grid Layout */}
                 <motion.div
-                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
                   variants={containerVariants}
                 >
                   {category.skills.map((skill) => {
@@ -293,17 +330,21 @@ export function SkillsSection() {
           className="text-center py-12"
         >
           <p className="text-muted-foreground text-lg">
-            No skills match the selected filters.
+            {searchQuery.trim() !== "" 
+              ? `No skills found matching &quot;${searchQuery}&quot;.`
+              : "No skills match the selected filters."
+            }
           </p>
           <Button
             variant="outline"
             onClick={() => {
               setSelectedProficiency("all");
               setSelectedCategory(null);
+              setSearchQuery("");
             }}
             className="mt-4"
           >
-            Clear Filters
+            Clear All Filters
           </Button>
         </motion.div>
       )}
