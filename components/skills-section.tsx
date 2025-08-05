@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback, memo } from "react";
 import {
   Code,
   Database,
@@ -53,24 +53,6 @@ const itemVariants = {
   },
 };
 
-const iconMap = {
-  code: Code,
-  database: Database,
-  wind: Wind,
-  type: Type,
-  server: Server,
-  globe: Globe,
-  palette: Palette,
-  cloud: Cloud,
-  layers: Layers,
-  gitBranch: GitBranch,
-  github: Github,
-  package: Package,
-  container: Container,
-  flame: Flame,
-  zap: Zap,
-};
-
 const proficiencyColors = {
   beginner: "text-green-400",
   intermediate: "text-yellow-400",
@@ -85,11 +67,46 @@ const proficiencyLabels = {
   expert: "Expert",
 };
 
-export function SkillsSection() {
+export const SkillsSection = memo(function SkillsSection() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [selectedProficiency, setSelectedProficiency] =
     useState<ProficiencyFilter>("all");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // Memoized icon map for better performance
+  const iconMap = useMemo(
+    () => ({
+      code: Code,
+      database: Database,
+      wind: Wind,
+      type: Type,
+      server: Server,
+      globe: Globe,
+      palette: Palette,
+      cloud: Cloud,
+      layers: Layers,
+      gitBranch: GitBranch,
+      github: Github,
+      package: Package,
+      container: Container,
+      flame: Flame,
+      zap: Zap,
+    }),
+    []
+  );
+
+  // Memoized event handlers
+  const handleSkillSelect = useCallback(
+    (skillName: string) => {
+      setSelectedSkill(selectedSkill === skillName ? null : skillName);
+    },
+    [selectedSkill]
+  );
+
+  const handleClearFilters = useCallback(() => {
+    setSelectedProficiency("all");
+    setSelectedCategory(null);
+  }, []);
 
   // Filter skills based on selected criteria
   const filteredCategories = useMemo(() => {
@@ -127,10 +144,14 @@ export function SkillsSection() {
     );
   }, [filteredCategories]);
 
-  const categories = skillCategories.map(({ title, icon }) => ({
-    title,
-    icon,
-  }));
+  const categories = useMemo(
+    () =>
+      skillCategories.map(({ title, icon }) => ({
+        title,
+        icon,
+      })),
+    []
+  );
 
   return (
     <SectionWrapper id="skills">
@@ -227,9 +248,7 @@ export function SkillsSection() {
                               y: -2,
                               transition: { duration: 0.2 },
                             }}
-                            onClick={() =>
-                              setSelectedSkill(isSelected ? null : skill.name)
-                            }
+                            onClick={() => handleSkillSelect(skill.name)}
                           >
                             {/* Highlighted indicator */}
                             {skill.isHighlighted && (
@@ -324,10 +343,7 @@ export function SkillsSection() {
           </p>
           <Button
             variant="outline"
-            onClick={() => {
-              setSelectedProficiency("all");
-              setSelectedCategory(null);
-            }}
+            onClick={handleClearFilters}
             className="mt-3"
           >
             Clear All Filters
@@ -336,4 +352,4 @@ export function SkillsSection() {
       )}
     </SectionWrapper>
   );
-}
+});
