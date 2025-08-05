@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { CursorContext } from "./cursor-context";
 import { scrollToSection } from "@/lib/scroll-utils";
 import { SocialLinks } from "./social-links";
+import { RESUME_URL } from "@/lib/constants";
+import { Download } from "lucide-react";
 
 const words = ["Hello,", "I'm", "Omar", "Daghestani"];
 
@@ -74,7 +76,7 @@ export function HeroSection() {
               and robust back-end solutions.
             </motion.p>
             <motion.div
-              className="flex justify-center md:justify-start items-center gap-4"
+              className="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4"
               variants={itemVariants}
             >
               <Button
@@ -86,6 +88,21 @@ export function HeroSection() {
               >
                 Contact Me
               </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--primary))] cursor-default"
+                onMouseEnter={() => setVariant("hover")}
+                onMouseLeave={() => setVariant("default")}
+              >
+                <a href={RESUME_URL} download>
+                  <Download className="w-4 h-4 mr-2" />
+                  Download CV
+                </a>
+              </Button>
+            </motion.div>
+            <motion.div variants={itemVariants}>
               <SocialLinks />
             </motion.div>
           </div>
