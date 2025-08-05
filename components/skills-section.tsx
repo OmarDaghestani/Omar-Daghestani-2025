@@ -101,7 +101,9 @@ export function SkillsSection() {
           const matchesSearch =
             searchQuery.trim() === "" ||
             skill.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            skill.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            skill.description
+              ?.toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
             category.title.toLowerCase().includes(searchQuery.toLowerCase());
 
           // Check proficiency filter
@@ -129,7 +131,10 @@ export function SkillsSection() {
 
   // Calculate total skills
   const totalSkills = useMemo(() => {
-    return filteredCategories.reduce((total, category) => total + category.skills.length, 0);
+    return filteredCategories.reduce(
+      (total, category) => total + category.skills.length,
+      0
+    );
   }, [filteredCategories]);
 
   const categories = skillCategories.map(({ title, icon }) => ({
@@ -330,10 +335,9 @@ export function SkillsSection() {
           className="text-center py-12"
         >
           <p className="text-muted-foreground text-lg">
-            {searchQuery.trim() !== "" 
+            {searchQuery.trim() !== ""
               ? `No skills found matching &quot;${searchQuery}&quot;.`
-              : "No skills match the selected filters."
-            }
+              : "No skills match the selected filters."}
           </p>
           <Button
             variant="outline"

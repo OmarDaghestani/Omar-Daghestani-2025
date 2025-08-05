@@ -41,7 +41,9 @@ export function SkillsFilter({
   categories,
 }: SkillsFilterProps) {
   const hasActiveFilters =
-    selectedProficiency !== "all" || selectedCategory !== null || searchQuery.trim() !== "";
+    selectedProficiency !== "all" ||
+    selectedCategory !== null ||
+    searchQuery.trim() !== "";
 
   return (
     <motion.div
@@ -52,9 +54,7 @@ export function SkillsFilter({
       {/* Enhanced Filter Header */}
       <div className="flex items-center justify-center gap-2">
         <Filter className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-semibold text-foreground">
-          Filter Skills
-        </h3>
+        <h3 className="text-lg font-semibold text-foreground">Filter Skills</h3>
         {hasActiveFilters && (
           <motion.div
             initial={{ scale: 0 }}
@@ -217,7 +217,7 @@ export function SkillsFilter({
                   </Badge>
                 </motion.div>
               )}
-              
+
               {selectedProficiency !== "all" && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
