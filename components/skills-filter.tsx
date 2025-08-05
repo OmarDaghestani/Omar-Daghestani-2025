@@ -95,7 +95,7 @@ export function SkillsFilter({
                 Proficiency Level
               </h4>
               <p className="text-xs text-muted-foreground">
-                Filter by your skill level
+                Filter by skill level
               </p>
             </div>
 

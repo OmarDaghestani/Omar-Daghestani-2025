@@ -49,6 +49,7 @@ If you prefer other services:
 ## Environment Variables
 
 Your `.env.local` should contain:
+
 ```
 NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_ACTUAL_FORM_ID
 ```

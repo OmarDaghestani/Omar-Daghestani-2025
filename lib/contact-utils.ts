@@ -13,7 +13,8 @@ export const sendContactEmail = async (
     if (!formspreeEndpoint) {
       return {
         success: false,
-        message: "Email service not configured. Please set up your Formspree endpoint.",
+        message:
+          "Email service not configured. Please set up your Formspree endpoint.",
       };
     }
 
