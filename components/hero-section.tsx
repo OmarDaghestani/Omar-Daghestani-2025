@@ -27,16 +27,16 @@ const wordVariants = {
 
 const nameVariants = {
   hidden: { y: 30, opacity: 0, scale: 0.9 },
-  visible: { 
-    y: 0, 
-    opacity: 1, 
+  visible: {
+    y: 0,
+    opacity: 1,
     scale: 1,
-    transition: { 
+    transition: {
       duration: 0.6,
       ease: "easeOut",
       type: "spring",
-      stiffness: 100
-    }
+      stiffness: 100,
+    },
   },
 };
 
@@ -81,7 +81,7 @@ export function HeroSection() {
                     </motion.span>
                   );
                 }
-                
+
                 // Regular styling for other words
                 return (
                   <motion.span
@@ -94,7 +94,7 @@ export function HeroSection() {
                 );
               })}
             </motion.h1>
-            
+
             {/* Enhanced name highlight */}
             <motion.div
               className="flex justify-center md:justify-start items-center gap-2"
@@ -106,7 +106,7 @@ export function HeroSection() {
               </span>
               <div className="h-px w-8 bg-gradient-to-r from-primary/50 to-transparent" />
             </motion.div>
-            
+
             <motion.p
               className="text-lg text-muted-foreground max-w-xl mx-auto md:mx-0"
               variants={itemVariants}

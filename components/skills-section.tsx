@@ -90,22 +90,12 @@ export function SkillsSection() {
   const [selectedProficiency, setSelectedProficiency] =
     useState<ProficiencyFilter>("all");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
 
   // Filter skills based on selected criteria
   const filteredCategories = useMemo(() => {
     const result = skillCategories
       .map((category) => {
         const filteredSkills = category.skills.filter((skill) => {
-          // Check search query
-          const matchesSearch =
-            searchQuery.trim() === "" ||
-            skill.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            skill.description
-              ?.toLowerCase()
-              .includes(searchQuery.toLowerCase()) ||
-            category.title.toLowerCase().includes(searchQuery.toLowerCase());
-
           // Check proficiency filter
           const matchesProficiency =
             selectedProficiency === "all" ||
@@ -115,7 +105,7 @@ export function SkillsSection() {
           const matchesCategory =
             selectedCategory === null || category.title === selectedCategory;
 
-          return matchesSearch && matchesProficiency && matchesCategory;
+          return matchesProficiency && matchesCategory;
         });
 
         return {
@@ -127,7 +117,7 @@ export function SkillsSection() {
       .sort((a, b) => a.priority - b.priority);
 
     return result;
-  }, [selectedProficiency, selectedCategory, searchQuery]);
+  }, [selectedProficiency, selectedCategory]);
 
   // Calculate total skills
   const totalSkills = useMemo(() => {
@@ -149,14 +139,12 @@ export function SkillsSection() {
       </SectionTitle>
 
       {/* Skills Filter */}
-      <div className="mb-8">
+      <div className="mb-6">
         <SkillsFilter
           selectedProficiency={selectedProficiency}
           onProficiencyChange={setSelectedProficiency}
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
-          searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
           categories={categories}
         />
       </div>
@@ -165,25 +153,20 @@ export function SkillsSection() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
+        className="text-center mb-6"
       >
         <div className="flex items-center justify-center gap-4 flex-wrap">
-          <Badge variant="outline" className="px-4 py-2 text-sm">
+          <Badge variant="outline" className="px-3 py-1 text-xs">
             {totalSkills} skills displayed
           </Badge>
-          <Badge variant="outline" className="px-4 py-2 text-sm">
+          <Badge variant="outline" className="px-3 py-1 text-xs">
             {filteredCategories.length} categories
           </Badge>
-          {searchQuery.trim() !== "" && (
-            <Badge variant="secondary" className="px-4 py-2 text-sm">
-              Searching: &quot;{searchQuery}&quot;
-            </Badge>
-          )}
         </div>
       </motion.div>
 
       <TooltipProvider>
-        <div className="space-y-12">
+        <div className="space-y-8">
           {filteredCategories.map((category) => {
             const CategoryIcon =
               iconMap[category.icon as keyof typeof iconMap] || Code; // Fallback to Code icon
@@ -194,17 +177,17 @@ export function SkillsSection() {
                 initial="hidden"
                 animate="visible"
                 variants={containerVariants}
-                className="space-y-6"
+                className="space-y-4"
               >
                 {/* Category Header */}
-                <div className="text-center space-y-3">
-                  <div className="flex items-center justify-center gap-3">
-                    <CategoryIcon className="w-7 h-7 text-primary" />
-                    <h3 className="text-2xl font-bold text-foreground">
+                <div className="text-center space-y-2">
+                  <div className="flex items-center justify-center gap-2">
+                    <CategoryIcon className="w-5 h-5 text-primary" />
+                    <h3 className="text-xl font-bold text-foreground">
                       {category.title}
                     </h3>
                   </div>
-                  <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+                  <p className="text-muted-foreground max-w-xl mx-auto text-xs">
                     {category.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
@@ -217,7 +200,7 @@ export function SkillsSection() {
 
                 {/* Responsive Grid Layout */}
                 <motion.div
-                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
                   variants={containerVariants}
                 >
                   {category.skills.map((skill) => {
@@ -229,7 +212,7 @@ export function SkillsSection() {
                       <Tooltip key={skill.name}>
                         <TooltipTrigger asChild>
                           <motion.div
-                            className={`group relative flex flex-col items-center justify-center p-5 bg-white/5 border rounded-xl backdrop-blur-md shadow-sm cursor-pointer transition-all duration-300 ${
+                            className={`group relative flex flex-col items-center justify-center p-3 bg-white/5 border rounded-lg backdrop-blur-md shadow-sm cursor-pointer transition-all duration-300 ${
                               skill.isHighlighted
                                 ? "border-primary/50 bg-primary/5"
                                 : "border-white/10"
@@ -241,7 +224,7 @@ export function SkillsSection() {
                             variants={itemVariants}
                             whileHover={{
                               scale: 1.05,
-                              y: -3,
+                              y: -2,
                               transition: { duration: 0.2 },
                             }}
                             onClick={() =>
@@ -251,55 +234,55 @@ export function SkillsSection() {
                             {/* Highlighted indicator */}
                             {skill.isHighlighted && (
                               <div className="absolute -top-1 -right-1">
-                                <Star className="w-4 h-4 text-primary fill-primary" />
+                                <Star className="w-3 h-3 text-primary fill-primary" />
                               </div>
                             )}
 
                             {/* Icon */}
-                            <div className="mb-3 group-hover:scale-110 transition-transform duration-200">
+                            <div className="mb-2 group-hover:scale-110 transition-transform duration-200">
                               <IconComponent
-                                className="w-10 h-10"
+                                className="w-8 h-8"
                                 style={{ color: skill.color }}
                               />
                             </div>
 
                             {/* Skill name */}
-                            <span className="text-sm font-medium text-center text-muted-foreground group-hover:text-primary transition-colors mb-2">
+                            <span className="text-xs font-medium text-center text-muted-foreground group-hover:text-primary transition-colors mb-1">
                               {skill.name}
                             </span>
 
                             {/* Proficiency indicator */}
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1">
                               <div
-                                className={`w-2 h-2 rounded-full ${
+                                className={`w-1.5 h-1.5 rounded-full ${
                                   proficiencyColors[skill.proficiency]
                                 }`}
                               />
-                              <span className="text-xs text-muted-foreground">
+                              <span className="text-[10px] text-muted-foreground">
                                 {proficiencyLabels[skill.proficiency]}
                               </span>
                             </div>
 
                             {/* Years of experience */}
                             {skill.yearsOfExperience && (
-                              <span className="text-xs text-muted-foreground mt-1">
+                              <span className="text-[10px] text-muted-foreground mt-1">
                                 {skill.yearsOfExperience}+ years
                               </span>
                             )}
 
                             {/* Info icon for description */}
                             {skill.description && (
-                              <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <Info className="w-3 h-3 text-muted-foreground" />
+                              <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <Info className="w-2.5 h-2.5 text-muted-foreground" />
                               </div>
                             )}
                           </motion.div>
                         </TooltipTrigger>
                         <TooltipContent side="top" className="max-w-xs">
                           <div className="space-y-2">
-                            <h4 className="font-semibold">{skill.name}</h4>
+                            <h4 className="font-semibold text-sm">{skill.name}</h4>
                             {skill.description && (
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-xs text-muted-foreground">
                                 {skill.description}
                               </p>
                             )}
@@ -332,21 +315,18 @@ export function SkillsSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-12"
+          className="text-center py-8"
         >
-          <p className="text-muted-foreground text-lg">
-            {searchQuery.trim() !== ""
-              ? `No skills found matching &quot;${searchQuery}&quot;.`
-              : "No skills match the selected filters."}
+          <p className="text-muted-foreground text-base">
+            No skills match the selected filters.
           </p>
           <Button
             variant="outline"
             onClick={() => {
               setSelectedProficiency("all");
               setSelectedCategory(null);
-              setSearchQuery("");
             }}
-            className="mt-4"
+            className="mt-3"
           >
             Clear All Filters
           </Button>
