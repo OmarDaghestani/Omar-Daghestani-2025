@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useContext, useState, useCallback } from "react";
+import { useContext, useCallback } from "react";
 import { CursorContext } from "./cursor-context";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -36,14 +35,9 @@ import { SectionTitle } from "./section-title";
 
 export function ProjectsSection() {
   const { setVariant } = useContext(CursorContext);
-  const [current, setCurrent] = useState(1);
-  const [count, setCount] = useState(projects.length);
 
-  const handleCarouselSelect = useCallback((api: any) => {
-    if (api) {
-      setCurrent(api.selectedScrollSnap() + 1);
-      setCount(api.scrollSnapList().length);
-    }
+  const handleCarouselSelect = useCallback(() => {
+    // Handle carousel selection if needed
   }, []);
 
   return (

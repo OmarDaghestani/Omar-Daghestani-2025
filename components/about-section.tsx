@@ -61,12 +61,12 @@ export function AboutSection() {
             As a developer, I am a user-centric design advocate with a
             meticulous attention to detail. I believe the best applications are
             born from a deep understanding of user needs, translated into clean,
-            scalable, and maintainable code. Whether I'm architecting a backend
-            or polishing a UI, my goal is always to create something that is not
-            just functional, but delightful to use.
+            scalable, and maintainable code. Whether I&apos;m architecting a
+            backend or polishing a UI, my goal is always to create something
+            that is not just functional, but delightful to use.
           </motion.p>
           <motion.p variants={textVariants}>
-            Outside of coding, I'm an avid hiker, a hobby that trains my
+            Outside of coding, I&apos;m an avid hiker, a hobby that trains my
             problem-solving skills on winding trails, and an amateur chef, which
             fosters creativity and precision—traits I bring to every project.
           </motion.p>
@@ -80,7 +80,7 @@ export function AboutSection() {
               className="mt-4 cursor-default"
               onClick={handleContactClick}
             >
-              Let's Connect
+              Let&apos;s Connect
             </Button>
           </motion.div>
         </div>
