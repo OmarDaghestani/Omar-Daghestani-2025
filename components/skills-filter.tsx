@@ -47,7 +47,9 @@ export function SkillsFilter({
       {/* Compact Filter Header */}
       <div className="flex items-center justify-center gap-2">
         <Filter className="w-4 h-4 text-primary" />
-        <h3 className="text-base font-semibold text-foreground">Filter Skills</h3>
+        <h3 className="text-base font-semibold text-foreground">
+          Filter Skills
+        </h3>
         {hasActiveFilters && (
           <motion.div
             initial={{ scale: 0 }}
@@ -164,7 +166,9 @@ export function SkillsFilter({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-3 h-3 text-primary" />
-                <span className="text-xs font-semibold text-foreground">Active Filters</span>
+                <span className="text-xs font-semibold text-foreground">
+                  Active Filters
+                </span>
               </div>
               <Button
                 variant="ghost"
