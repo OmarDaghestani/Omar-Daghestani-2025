@@ -1,27 +1,44 @@
 # Omar Daghestani - Portfolio 2025
 
-A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS.
+A modern, high-performance portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features advanced performance optimizations, smooth animations, and a responsive design.
 
-## Features
+## ✨ Features
 
-- 🎨 Modern, responsive design
-- 🌙 Dark mode support
-- ⚡ Fast performance with Next.js
-- 🎭 Smooth animations with Framer Motion
-- 📱 Mobile-first approach
-- ♿ Accessibility focused
-- 🎯 SEO optimized
+- 🎨 **Modern, responsive design** with dark mode support
+- ⚡ **High performance** with optimized bundle size and lazy loading
+- 🎭 **Smooth animations** with Framer Motion
+- 📱 **Mobile-first approach** with excellent responsive design
+- ♿ **Accessibility focused** with proper ARIA labels and keyboard navigation
+- 🎯 **SEO optimized** with metadata and structured data
+- 🔍 **Interactive skills filtering** with search and category filters
+- 📧 **Functional contact form** with Formspree integration
+- 🎪 **Project carousel** with smooth navigation
+- 📊 **Performance monitoring** with Core Web Vitals tracking
+- 🚀 **Optimized for speed** with bundle analysis and tree shaking
 
-## Tech Stack
+## 🛠 Tech Stack
 
+### Core Technologies
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **UI Components**: Custom components with class-variance-authority
+- **Styling**: Tailwind CSS with custom design system
+- **Animations**: Framer Motion with centralized utilities
+- **Icons**: Lucide React with optimized imports
 
-## Getting Started
+### Performance & Optimization
+- **Bundle Analysis**: @next/bundle-analyzer
+- **Code Splitting**: Dynamic imports and lazy loading
+- **Tree Shaking**: Optimized imports and dead code elimination
+- **Image Optimization**: Next.js Image component with WebP/AVIF support
+- **Font Optimization**: Google Fonts with display swap
+
+### UI Components
+- **Custom Components**: Built with class-variance-authority
+- **Radix UI**: Accessible primitives for tooltips and dialogs
+- **Embla Carousel**: Smooth project carousel
+- **Form Handling**: React Hook Form with validation
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -32,103 +49,189 @@ A modern, responsive portfolio website built with Next.js, TypeScript, and Tailw
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/OmarDaghestani/Omar-Daghestani-2025.git
 cd Omar-Daghestani-2025
 ```
 
 2. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
 
-3. Run the development server:
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+# Add your Formspree endpoint
+NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
+```
+
+4. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 ├── app/                    # Next.js app directory
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
+│   ├── globals.css        # Global styles and CSS variables
+│   ├── layout.tsx         # Root layout with metadata
+│   └── page.tsx           # Home page with lazy loading
 ├── components/            # React components
-│   ├── ui/               # Reusable UI components
+│   ├── ui/               # Reusable UI components (Button, Card, etc.)
 │   ├── header.tsx        # Navigation header
-│   ├── hero-section.tsx  # Hero section
+│   ├── hero-section.tsx  # Hero section with prominent name display
 │   ├── about-section.tsx # About section
-│   ├── skills-section.tsx # Skills section
-│   ├── projects-section.tsx # Projects section
-│   ├── contact-section.tsx # Contact section
-│   └── footer.tsx        # Footer
+│   ├── skills-section.tsx # Skills section with filtering
+│   ├── skills-filter.tsx # Interactive skills filter component
+│   ├── projects-section.tsx # Projects section with carousel
+│   ├── insights-section.tsx # Insights section
+│   ├── contact-section.tsx # Contact section with form
+│   ├── footer.tsx        # Footer
+│   ├── custom-cursor.tsx # Custom cursor component
+│   ├── scroll-progress-indicator.tsx # Scroll progress
+│   └── performance-monitor.tsx # Performance tracking
 ├── hooks/                # Custom React hooks
-├── lib/                  # Utility functions
+│   ├── use-mouse-position.ts
+│   └── use-scroll.ts
+├── lib/                  # Utility functions and data
+│   ├── constants.ts      # App constants
+│   ├── utils.ts          # General utilities
+│   ├── motion-utils.ts   # Framer Motion utilities
+│   ├── icon-utils.ts     # Icon management
+│   ├── skills-data.ts    # Skills data
+│   ├── projects-data.ts  # Projects data
+│   └── contact-utils.ts  # Contact form utilities
 ├── public/               # Static assets
-└── styles/               # Additional styles
+│   ├── Omar-Daghestani-Resume-2025.pdf
+│   └── project-images/
+└── next.config.js        # Next.js configuration with optimizations
 ```
 
-## Customization
+## ⚡ Performance Optimizations
+
+### Bundle Optimization
+- **Tree Shaking**: Enabled for all dependencies
+- **Code Splitting**: Lazy loading for non-critical components
+- **Bundle Analysis**: Integrated bundle analyzer for monitoring
+- **Optimized Imports**: Centralized icon and motion utilities
+
+### Webpack Configuration
+- **Chunk Splitting**: Separate chunks for Framer Motion, UI libraries, and commons
+- **Module Resolution**: Optimized for better deduplication
+- **Compression**: Enabled for production builds
+
+### Image & Font Optimization
+- **Next.js Image**: Automatic optimization with WebP/AVIF
+- **Font Display**: Swap for better loading performance
+- **Preconnect**: Optimized font loading
+
+## 🎨 Customization
 
 ### Personal Information
 Update the following files with your information:
-- `app/layout.tsx` - Update metadata
-- `components/header.tsx` - Update name in header
-- `components/hero-section.tsx` - Update hero content
-- `components/about-section.tsx` - Update about content
-- `components/skills-section.tsx` - Update skills
-- `components/projects-section.tsx` - Update projects
-- `components/contact-section.tsx` - Update contact information
 
-### Styling
-- Colors and theme: Update CSS variables in `app/globals.css`
-- Tailwind configuration: Modify `tailwind.config.ts`
+#### Core Information
+- `app/layout.tsx` - Update metadata and SEO information
+- `components/hero-section.tsx` - Update hero content and name
+- `components/about-section.tsx` - Update about content
+- `lib/constants.ts` - Update resume URL and contact links
+
+#### Skills & Projects
+- `lib/skills-data.ts` - Update skills, proficiency levels, and categories
+- `lib/projects-data.ts` - Update projects, descriptions, and links
+
+#### Contact Information
+- `components/contact-section.tsx` - Update contact form
+- `components/footer.tsx` - Update social links
+- `.env.local` - Update Formspree endpoint
+
+### Styling & Theme
+- **Colors**: Update CSS variables in `app/globals.css`
+- **Tailwind**: Modify `tailwind.config.ts` for custom design tokens
+- **Animations**: Customize motion variants in `lib/motion-utils.ts`
 
 ### Assets
-- Replace `public/cv.pdf` with your actual CV
-- Add your profile images to the `public/` directory
-- Update project images and links
+- **Resume**: Replace `public/Omar-Daghestani-Resume-2025.pdf`
+- **Images**: Add project images to `public/project-images/`
+- **Icons**: Update icon mappings in `lib/icon-utils.ts`
 
-## Deployment
+## 📊 Performance Monitoring
+
+### Bundle Analysis
+```bash
+# Generate bundle analysis report
+ANALYZE=true npm run build
+```
+
+### Core Web Vitals
+The portfolio includes built-in performance monitoring for:
+- **LCP** (Largest Contentful Paint)
+- **FID** (First Input Delay)
+- **CLS** (Cumulative Layout Shift)
+
+## 🚀 Deployment
 
 ### Vercel (Recommended)
 1. Push your code to GitHub
 2. Connect your repository to Vercel
-3. Deploy automatically
+3. Add environment variables in Vercel dashboard
+4. Deploy automatically
+
+### Environment Variables
+```bash
+NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
+```
 
 ### Other Platforms
 The app can be deployed to any platform that supports Next.js:
-- Netlify
-- Railway
-- DigitalOcean App Platform
-- AWS Amplify
+- **Netlify**: Automatic deployment with build hooks
+- **Railway**: Container-based deployment
+- **DigitalOcean App Platform**: Managed deployment
+- **AWS Amplify**: AWS integration
 
-## Scripts
+## 📜 Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run dev` - Start development server with Turbo
+- `npm run build` - Build for production with optimizations
 - `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+- `npm run lint` - Run ESLint for code quality
+- `ANALYZE=true npm run build` - Build with bundle analysis
 
-## Contributing
+## 🔧 Development
+
+### Code Quality
+- **TypeScript**: Strict type checking enabled
+- **ESLint**: Configured for Next.js and React
+- **Prettier**: Code formatting (if configured)
+
+### Performance Guidelines
+- Use lazy loading for non-critical components
+- Optimize images with Next.js Image component
+- Minimize bundle size with tree shaking
+- Monitor Core Web Vitals in production
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## License
+## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## Contact
+## 📞 Contact
 
-- Email: omar.daghestani@example.com
-- LinkedIn: [Your LinkedIn]
-- GitHub: [Your GitHub] 
+- **Email**: omar.daghestani@gmail.com
+- **LinkedIn**: [Omar Daghestani](https://linkedin.com/in/omar-daghestani)
+- **GitHub**: [@OmarDaghestani](https://github.com/OmarDaghestani)
+- **Portfolio**: [omar-daghestani.com](https://omar-daghestani.com)
+
+---
+
+**Built with ❤️ using Next.js, TypeScript, and Tailwind CSS** 
