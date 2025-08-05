@@ -1,29 +1,31 @@
 "use client";
 
 import { useState, useContext } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 import { Menu, X, Code } from "lucide-react";
 import { CursorContext } from "./cursor-context";
-import { useScroll } from "@/hooks/use-scroll";
-import { NAVIGATION_LINKS, RESUME_URL } from "@/lib/constants";
+import { scrollToSection } from "@/lib/scroll-utils";
+import { NAVIGATION_LINKS } from "@/lib/constants";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setVariant } = useContext(CursorContext);
-  const { isScrolled, handleNavLinkClick } = useScroll();
 
-  const handleMenuToggle = () => setIsMenuOpen(!isMenuOpen);
-  const handleMenuClose = () => setIsMenuOpen(false);
+  const handleNavClick = (e: React.MouseEvent, targetId: string) => {
+    e.preventDefault();
+    scrollToSection(targetId);
+    setIsMenuOpen(false);
+  };
 
-  const handleNavClick = (e: React.MouseEvent, href: string) => {
-    handleNavLinkClick(e, href, handleMenuClose);
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isMenuOpen
-          ? "bg-background/80 backdrop-blur-2xl border-b border-white/10"
+        isMenuOpen
+          ? "bg-background/95 backdrop-blur-md border-b border-white/10"
           : "bg-transparent"
       }`}
     >
@@ -56,21 +58,6 @@ export function Header() {
               </button>
             ))}
           </nav>
-
-          {/* Download CV Button */}
-          <div className="hidden md:block">
-            <Button
-              asChild
-              variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--primary))] cursor-default"
-              onMouseEnter={() => setVariant("hover")}
-              onMouseLeave={() => setVariant("default")}
-            >
-              <a href={RESUME_URL} download>
-                Download CV
-              </a>
-            </Button>
-          </div>
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden">
@@ -107,16 +94,6 @@ export function Header() {
                 {link.label}
               </button>
             ))}
-            <Button
-              asChild
-              className="mt-4 border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-default"
-              onMouseEnter={() => setVariant("hover")}
-              onMouseLeave={() => setVariant("default")}
-            >
-              <a href={RESUME_URL} download>
-                Download CV
-              </a>
-            </Button>
           </nav>
         </div>
       )}
