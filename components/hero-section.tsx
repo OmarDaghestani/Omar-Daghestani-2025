@@ -25,6 +25,21 @@ const wordVariants = {
   visible: { y: 0, opacity: 1, transition: { duration: 0.4 } },
 };
 
+const nameVariants = {
+  hidden: { y: 30, opacity: 0, scale: 0.9 },
+  visible: { 
+    y: 0, 
+    opacity: 1, 
+    scale: 1,
+    transition: { 
+      duration: 0.6,
+      ease: "easeOut",
+      type: "spring",
+      stiffness: 100
+    }
+  },
+};
+
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
@@ -51,22 +66,47 @@ export function HeroSection() {
               className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight"
               variants={containerVariants}
             >
-              {words.map((word, index) => (
-                <motion.span
-                  key={index}
-                  className="inline-block mr-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
-                  variants={wordVariants}
-                >
-                  {word}
-                </motion.span>
-              ))}
+              {words.map((word, index) => {
+                // Special styling for "Omar Daghestani"
+                if (word === "Omar" || word === "Daghestani") {
+                  return (
+                    <motion.span
+                      key={index}
+                      className="inline-block mr-4 text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500 relative"
+                      variants={nameVariants}
+                    >
+                      {word}
+                      {/* Glow effect for the name */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-500 to-pink-500 blur-lg opacity-30 -z-10" />
+                    </motion.span>
+                  );
+                }
+                
+                // Regular styling for other words
+                return (
+                  <motion.span
+                    key={index}
+                    className="inline-block mr-4 text-muted-foreground"
+                    variants={wordVariants}
+                  >
+                    {word}
+                  </motion.span>
+                );
+              })}
             </motion.h1>
-            <motion.h2
-              className="text-2xl md:text-3xl font-semibold text-muted-foreground"
+            
+            {/* Enhanced name highlight */}
+            <motion.div
+              className="flex justify-center md:justify-start items-center gap-2"
               variants={itemVariants}
             >
-              Full-Stack Web Developer
-            </motion.h2>
+              <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary/50" />
+              <span className="text-sm font-medium text-primary/70 uppercase tracking-wider">
+                Full-Stack Developer
+              </span>
+              <div className="h-px w-8 bg-gradient-to-r from-primary/50 to-transparent" />
+            </motion.div>
+            
             <motion.p
               className="text-lg text-muted-foreground max-w-xl mx-auto md:mx-0"
               variants={itemVariants}
