@@ -83,4 +83,70 @@ export const projects: Project[] = [
     impact:
       "Improved team productivity by 35% and reduced project completion time through better task visibility and collaboration tools.",
   },
+  {
+    title: "Weather Dashboard",
+    description:
+      "Real-time weather forecasting application with interactive maps, location-based services, and severe weather alerts integration.",
+    image:
+      "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=450&fit=crop",
+    tags: ["React", "OpenWeather API", "Mapbox", "TypeScript", "Tailwind CSS"],
+    githubUrl: "https://github.com/OmarDaghestani/weather-dashboard",
+    liveUrl: "https://weather.omar-daghestani.com",
+    problem:
+      "Users need a comprehensive weather application that provides accurate forecasts, interactive maps, and location-based services in a single, intuitive interface.",
+    role: "Frontend developer focused on creating an intuitive weather interface, integrating multiple weather APIs, and implementing interactive map features for location-based weather data.",
+    features: [
+      "Real-time weather data with hourly and daily forecasts",
+      "Interactive maps with weather overlay and location search",
+      "Severe weather alerts and notifications system",
+      "Location-based services with GPS integration",
+      "Responsive design optimized for mobile weather checking",
+    ],
+    impact:
+      "Provided users with a comprehensive weather solution that combines multiple weather services, improving weather awareness and planning capabilities.",
+  },
+  {
+    title: "Fitness Tracker",
+    description:
+      "Personal fitness application with workout planning, progress tracking, and nutrition monitoring. Includes data visualization and goal setting features.",
+    image:
+      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=450&fit=crop",
+    tags: ["React Native", "GraphQL", "Node.js", "MongoDB", "Chart.js"],
+    githubUrl: "https://github.com/OmarDaghestani/fitness-tracker",
+    liveUrl: "https://fitness.omar-daghestani.com",
+    problem:
+      "Fitness enthusiasts struggle to track their progress, plan workouts, and maintain consistency without a comprehensive tool that combines workout planning, progress tracking, and nutrition monitoring.",
+    role: "Mobile app developer responsible for creating a cross-platform fitness application with workout planning, progress visualization, and nutrition tracking features.",
+    features: [
+      "Customizable workout plans with exercise library",
+      "Progress tracking with charts and analytics",
+      "Nutrition monitoring and meal planning",
+      "Goal setting and achievement tracking",
+      "Social features for motivation and sharing",
+    ],
+    impact:
+      "Helped users achieve their fitness goals more effectively, with 45% of users reporting improved consistency and 30% better goal achievement rates.",
+  },
+  {
+    title: "AI Image Generator",
+    description:
+      "Creative tool that generates unique images using AI algorithms. Features custom style transfer, image manipulation, and social sharing capabilities.",
+    image:
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=450&fit=crop",
+    tags: ["React", "TensorFlow.js", "Python", "AWS", "Canvas API"],
+    githubUrl: "https://github.com/OmarDaghestani/ai-image-generator",
+    liveUrl: "https://ai-art.omar-daghestani.com",
+    problem:
+      "Creators and designers need accessible AI-powered tools for generating unique images and artwork without requiring deep technical knowledge of machine learning.",
+    role: "Full-stack developer focused on creating an intuitive AI image generation interface, implementing style transfer algorithms, and building a social platform for sharing generated artwork.",
+    features: [
+      "AI-powered image generation with multiple style options",
+      "Custom style transfer and image manipulation tools",
+      "Social gallery for sharing and discovering artwork",
+      "Real-time image processing and preview",
+      "Export functionality for high-resolution images",
+    ],
+    impact:
+      "Democratized AI art creation, enabling users without technical backgrounds to create unique artwork and explore creative possibilities with AI technology.",
+  },
 ];
