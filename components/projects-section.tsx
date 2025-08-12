@@ -111,70 +111,70 @@ export function ProjectsSection() {
                       </Card>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="max-w-4xl w-[90vw] bg-background/80 backdrop-blur-2xl border-white/10 text-foreground">
-                    <DialogHeader>
-                      <DialogTitle className="text-3xl font-bold text-primary mb-2">
+                  <DialogContent className="max-w-4xl w-[95vw] sm:w-[90vw] max-h-[90vh] overflow-y-auto bg-background/80 backdrop-blur-2xl border-white/10 text-foreground p-4 sm:p-6">
+                    <DialogHeader className="space-y-3">
+                      <DialogTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-2">
                         {project.title}
                       </DialogTitle>
-                      <DialogDescription className="text-lg text-muted-foreground">
+                      <DialogDescription className="text-sm sm:text-base md:text-lg text-muted-foreground">
                         {project.description}
                       </DialogDescription>
                     </DialogHeader>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6">
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag) => (
                           <Badge
                             key={tag}
                             variant="secondary"
-                            className="bg-primary/10 text-primary border-primary/20"
+                            className="bg-primary/10 text-primary border-primary/20 text-xs"
                           >
                             {tag}
                           </Badge>
                         ))}
                       </div>
 
-                      <div className="space-y-4">
+                      <div className="space-y-3 sm:space-y-4">
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2">
+                          <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">
                             Problem
                           </h4>
-                          <p className="text-muted-foreground">
+                          <p className="text-muted-foreground text-sm sm:text-base">
                             {project.problem}
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2">
+                          <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">
                             My Role
                           </h4>
-                          <p className="text-muted-foreground">
+                          <p className="text-muted-foreground text-sm sm:text-base">
                             {project.role}
                           </p>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2">
+                          <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">
                             Key Features
                           </h4>
-                          <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                          <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm sm:text-base">
                             {project.features.map((feature, index) => (
                               <li key={index}>{feature}</li>
                             ))}
                           </ul>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2">
+                          <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">
                             Impact
                           </h4>
-                          <p className="text-muted-foreground">
+                          <p className="text-muted-foreground text-sm sm:text-base">
                             {project.impact}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex gap-4 pt-4">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                         <Button
                           asChild
-                          className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
+                          className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base"
                           onMouseEnter={() => setVariant("hover")}
                           onMouseLeave={() => setVariant("default")}
                         >
@@ -190,7 +190,7 @@ export function ProjectsSection() {
                         <Button
                           asChild
                           variant="outline"
-                          className="flex-1"
+                          className="flex-1 text-sm sm:text-base"
                           onMouseEnter={() => setVariant("hover")}
                           onMouseLeave={() => setVariant("default")}
                         >
