@@ -47,7 +47,7 @@ export function SkillsFilter({
       {/* Compact Filter Header */}
       <div className="flex items-center justify-center gap-2">
         <Filter className="w-4 h-4 text-primary" />
-        <h3 className="text-base font-semibold text-foreground">
+        <h3 className="text-sm sm:text-base font-semibold text-foreground">
           Filter Skills
         </h3>
         {hasActiveFilters && (
@@ -63,14 +63,14 @@ export function SkillsFilter({
       </div>
 
       {/* Compact Filter Container */}
-      <div className="bg-gradient-to-br from-white/5 to-white/10 border border-white/20 rounded-lg p-3 backdrop-blur-sm shadow-lg">
-        <div className="space-y-3">
+      <div className="bg-gradient-to-br from-white/5 to-white/10 border border-white/20 rounded-lg p-3 sm:p-4 backdrop-blur-sm shadow-lg">
+        <div className="space-y-3 sm:space-y-4">
           {/* Proficiency Filter */}
           <div className="space-y-2">
             <h4 className="text-xs font-semibold text-foreground text-center">
               Proficiency Level
             </h4>
-            <div className="flex flex-wrap justify-center gap-1">
+            <div className="flex flex-wrap justify-center gap-1 sm:gap-2">
               {proficiencyOptions.map((option) => {
                 const isSelected = selectedProficiency === option.value;
                 return (
@@ -85,7 +85,7 @@ export function SkillsFilter({
                       onClick={() =>
                         onProficiencyChange(option.value as ProficiencyFilter)
                       }
-                      className={`px-2 py-1 h-7 text-xs transition-all duration-200 ${
+                      className={`px-2 sm:px-3 py-1 h-7 sm:h-8 text-xs transition-all duration-200 ${
                         isSelected
                           ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                           : "hover:bg-white/10 hover:border-primary/30"
@@ -107,7 +107,7 @@ export function SkillsFilter({
             <h4 className="text-xs font-semibold text-foreground text-center">
               Technology Category
             </h4>
-            <div className="flex flex-wrap justify-center gap-1">
+            <div className="flex flex-wrap justify-center gap-1 sm:gap-2">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -116,7 +116,7 @@ export function SkillsFilter({
                   variant={selectedCategory === null ? "default" : "outline"}
                   size="sm"
                   onClick={() => onCategoryChange(null)}
-                  className={`px-3 py-1 h-7 text-xs transition-all duration-200 ${
+                  className={`px-2 sm:px-3 py-1 h-7 sm:h-8 text-xs transition-all duration-200 ${
                     selectedCategory === null
                       ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                       : "hover:bg-white/10 hover:border-primary/30"
@@ -138,7 +138,7 @@ export function SkillsFilter({
                       variant={isSelected ? "default" : "outline"}
                       size="sm"
                       onClick={() => onCategoryChange(category.title)}
-                      className={`px-3 py-1 h-7 text-xs transition-all duration-200 ${
+                      className={`px-2 sm:px-3 py-1 h-7 sm:h-8 text-xs transition-all duration-200 ${
                         isSelected
                           ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                           : "hover:bg-white/10 hover:border-primary/30"
@@ -161,7 +161,7 @@ export function SkillsFilter({
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
-            className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-2 backdrop-blur-sm"
+            className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-2 sm:p-3 backdrop-blur-sm"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -177,13 +177,13 @@ export function SkillsFilter({
                   onProficiencyChange("all");
                   onCategoryChange(null);
                 }}
-                className="text-xs text-muted-foreground hover:text-foreground h-5 px-2 transition-colors hover:bg-white/10"
+                className="text-xs text-muted-foreground hover:text-foreground h-6 sm:h-7 px-2 transition-colors hover:bg-white/10"
               >
                 <X className="w-3 h-3 mr-1" />
                 Clear
               </Button>
             </div>
-            <div className="flex flex-wrap gap-1 mt-1">
+            <div className="flex flex-wrap gap-1 mt-1 sm:mt-2">
               {selectedProficiency !== "all" && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}

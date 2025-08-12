@@ -122,11 +122,11 @@ export const SkillsSection = memo(function SkillsSection() {
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-6"
       >
-        <div className="flex items-center justify-center gap-4 flex-wrap">
-          <Badge variant="outline" className="px-3 py-1 text-xs">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
+          <Badge variant="outline" className="px-2 sm:px-3 py-1 text-xs">
             {totalSkills} skills displayed
           </Badge>
-          <Badge variant="outline" className="px-3 py-1 text-xs">
+          <Badge variant="outline" className="px-2 sm:px-3 py-1 text-xs">
             {filteredCategories.length} categories
           </Badge>
         </div>
@@ -151,11 +151,11 @@ export const SkillsSection = memo(function SkillsSection() {
                 <div className="text-center space-y-2">
                   <div className="flex items-center justify-center gap-2">
                     <CategoryIcon className="w-5 h-5 text-primary" />
-                    <h3 className="text-xl font-bold text-foreground">
+                    <h3 className="text-lg sm:text-xl font-bold text-foreground">
                       {category.title}
                     </h3>
                   </div>
-                  <p className="text-muted-foreground max-w-xl mx-auto text-xs">
+                  <p className="text-muted-foreground max-w-xl mx-auto text-xs sm:text-sm px-4">
                     {category.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
@@ -166,9 +166,9 @@ export const SkillsSection = memo(function SkillsSection() {
                   </div>
                 </div>
 
-                {/* Responsive Grid Layout */}
+                {/* Responsive Grid Layout - Improved for mobile */}
                 <motion.div
-                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
+                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3"
                   variants={staggerContainer}
                 >
                   {category.skills.map((skill) => {
@@ -181,7 +181,7 @@ export const SkillsSection = memo(function SkillsSection() {
                       <Tooltip key={skill.name}>
                         <TooltipTrigger asChild>
                           <motion.div
-                            className={`group relative flex flex-col items-center justify-center p-3 bg-white/5 border rounded-lg backdrop-blur-md shadow-sm cursor-pointer transition-all duration-300 ${
+                            className={`group relative flex flex-col items-center justify-center p-2 sm:p-3 bg-white/5 border rounded-lg backdrop-blur-md shadow-sm cursor-pointer transition-all duration-300 ${
                               skill.isHighlighted
                                 ? "border-primary/50 bg-primary/5"
                                 : "border-white/10"
@@ -202,33 +202,33 @@ export const SkillsSection = memo(function SkillsSection() {
                             )}
 
                             {/* Icon */}
-                            <div className="mb-2 group-hover:scale-110 transition-transform duration-200">
+                            <div className="mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-200">
                               <IconComponent
-                                className="w-8 h-8"
+                                className="w-6 h-6 sm:w-8 sm:h-8"
                                 style={{ color: skill.color }}
                               />
                             </div>
 
                             {/* Skill name */}
-                            <span className="text-xs font-medium text-center text-muted-foreground group-hover:text-primary transition-colors mb-1">
+                            <span className="text-[10px] sm:text-xs font-medium text-center text-muted-foreground group-hover:text-primary transition-colors mb-1 leading-tight">
                               {skill.name}
                             </span>
 
                             {/* Proficiency indicator */}
                             <div className="flex items-center gap-1">
                               <div
-                                className={`w-1.5 h-1.5 rounded-full ${
+                                className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${
                                   proficiencyColors[skill.proficiency]
                                 }`}
                               />
-                              <span className="text-[10px] text-muted-foreground">
+                              <span className="text-[8px] sm:text-[10px] text-muted-foreground">
                                 {proficiencyLabels[skill.proficiency]}
                               </span>
                             </div>
 
                             {/* Years of experience */}
                             {skill.yearsOfExperience && (
-                              <span className="text-[10px] text-muted-foreground mt-1">
+                              <span className="text-[8px] sm:text-[10px] text-muted-foreground mt-1">
                                 {skill.yearsOfExperience}+ years
                               </span>
                             )}
@@ -236,7 +236,7 @@ export const SkillsSection = memo(function SkillsSection() {
                             {/* Info icon for description */}
                             {skill.description && (
                               <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <uiIcons.info className="w-2.5 h-2.5 text-muted-foreground" />
+                                <uiIcons.info className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-muted-foreground" />
                               </div>
                             )}
                           </motion.div>
@@ -282,7 +282,7 @@ export const SkillsSection = memo(function SkillsSection() {
           animate={{ opacity: 1 }}
           className="text-center py-8"
         >
-          <p className="text-muted-foreground text-base">
+          <p className="text-muted-foreground text-sm sm:text-base">
             No skills match the selected filters.
           </p>
           <Button
