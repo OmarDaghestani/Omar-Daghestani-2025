@@ -211,8 +211,37 @@ export function ProjectsSection() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+
+        {/* Carousel Navigation with Visual Indicators */}
+        <div className="flex items-center justify-between mt-6 sm:mt-8">
+          <CarouselPrevious className="relative static sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-12" />
+
+          {/* Project Counter and Swipe Indicator */}
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline">Project</span>
+              <span className="font-medium">1</span>
+              <span>of</span>
+              <span className="font-medium">{projects.length}</span>
+            </div>
+
+            {/* Mobile Swipe Indicator */}
+            <div className="flex items-center gap-1 sm:hidden">
+              <div className="w-1 h-1 bg-muted-foreground rounded-full animate-pulse"></div>
+              <div
+                className="w-1 h-1 bg-muted-foreground rounded-full animate-pulse"
+                style={{ animationDelay: "0.2s" }}
+              ></div>
+              <div
+                className="w-1 h-1 bg-muted-foreground rounded-full animate-pulse"
+                style={{ animationDelay: "0.4s" }}
+              ></div>
+              <span className="text-xs ml-1">Swipe</span>
+            </div>
+          </div>
+
+          <CarouselNext className="relative static sm:absolute sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-12" />
+        </div>
       </Carousel>
     </SectionWrapper>
   );
