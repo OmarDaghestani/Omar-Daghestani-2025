@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback, memo } from "react";
+import { useState, useMemo, useCallback, memo, useEffect } from "react";
 import { skillIcons, uiIcons } from "@/lib/icon-utils";
 import { skillCategories } from "@/lib/skills-data";
 import { SectionWrapper } from "./section-wrapper";
@@ -99,8 +99,25 @@ export const SkillsSection = memo(function SkillsSection() {
     []
   );
 
+  // Debug logging
+  useEffect(() => {
+    console.log("Skills Section Debug:", {
+      totalCategories: skillCategories.length,
+      filteredCategories: filteredCategories.length,
+      totalSkills,
+      selectedProficiency,
+      selectedCategory,
+    });
+  }, [filteredCategories, totalSkills, selectedProficiency, selectedCategory]);
+
   return (
     <SectionWrapper id="skills">
+      {/* Test element to verify section renders */}
+      <div className="bg-red-500 text-white p-2 mb-4 text-center">
+        Skills Section is rendering - {filteredCategories.length} categories
+        found
+      </div>
+
       <SectionTitle>
         My Tech <span className="text-primary">Stack</span>
       </SectionTitle>
@@ -117,11 +134,7 @@ export const SkillsSection = memo(function SkillsSection() {
       </div>
 
       {/* Skills Summary */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-6"
-      >
+      <div className="text-center mb-6">
         <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
           <Badge variant="outline" className="px-2 sm:px-3 py-1 text-xs">
             {totalSkills} skills displayed
@@ -130,23 +143,17 @@ export const SkillsSection = memo(function SkillsSection() {
             {filteredCategories.length} categories
           </Badge>
         </div>
-      </motion.div>
+      </div>
 
-      <TooltipProvider>
-        <div className="space-y-8">
-          {filteredCategories.map((category) => {
+      <div className="space-y-8 min-h-[200px]">
+        {filteredCategories.length > 0 ? (
+          filteredCategories.map((category) => {
             const CategoryIcon =
               skillIcons[category.icon as keyof typeof skillIcons] ||
               skillIcons.code; // Fallback to Code icon
 
             return (
-              <motion.div
-                key={category.title}
-                initial="hidden"
-                animate="visible"
-                variants={staggerContainer}
-                className="space-y-4"
-              >
+              <div key={category.title} className="space-y-4">
                 {/* Category Header */}
                 <div className="text-center space-y-2">
                   <div className="flex items-center justify-center gap-2">
@@ -167,10 +174,7 @@ export const SkillsSection = memo(function SkillsSection() {
                 </div>
 
                 {/* Responsive Grid Layout - Improved for mobile */}
-                <motion.div
-                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3"
-                  variants={staggerContainer}
-                >
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3">
                   {category.skills.map((skill) => {
                     const IconComponent =
                       skillIcons[skill.icon as keyof typeof skillIcons] ||
@@ -178,122 +182,132 @@ export const SkillsSection = memo(function SkillsSection() {
                     const isSelected = selectedSkill === skill.name;
 
                     return (
-                      <Tooltip key={skill.name}>
-                        <TooltipTrigger asChild>
-                          <motion.div
-                            className={`group relative flex flex-col items-center justify-center p-2 sm:p-3 bg-white/5 border rounded-lg backdrop-blur-md shadow-sm cursor-pointer transition-all duration-300 ${
-                              skill.isHighlighted
-                                ? "border-primary/50 bg-primary/5"
-                                : "border-white/10"
-                            } ${
-                              isSelected
-                                ? "border-primary bg-primary/10 scale-105"
-                                : "hover:border-primary/30 hover:bg-primary/5"
-                            }`}
-                            variants={staggerItem}
-                            whileHover={hoverScale}
-                            onClick={() => handleSkillSelect(skill.name)}
-                          >
-                            {/* Highlighted indicator */}
-                            {skill.isHighlighted && (
-                              <div className="absolute -top-1 -right-1">
-                                <uiIcons.star className="w-3 h-3 text-primary fill-primary" />
+                      <TooltipProvider key={skill.name}>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div
+                              className={`group relative flex flex-col items-center justify-center p-2 sm:p-3 bg-white/5 border rounded-lg backdrop-blur-md shadow-sm cursor-pointer transition-all duration-300 ${
+                                skill.isHighlighted
+                                  ? "border-primary/50 bg-primary/5"
+                                  : "border-white/10"
+                              } ${
+                                isSelected
+                                  ? "border-primary bg-primary/10 scale-105"
+                                  : "hover:border-primary/30 hover:bg-primary/5"
+                              }`}
+                              onClick={() => handleSkillSelect(skill.name)}
+                            >
+                              {/* Highlighted indicator */}
+                              {skill.isHighlighted && (
+                                <div className="absolute -top-1 -right-1">
+                                  <uiIcons.star className="w-3 h-3 text-primary fill-primary" />
+                                </div>
+                              )}
+
+                              {/* Icon */}
+                              <div className="mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-200">
+                                <IconComponent
+                                  className="w-6 h-6 sm:w-8 sm:h-8"
+                                  style={{ color: skill.color }}
+                                />
                               </div>
-                            )}
 
-                            {/* Icon */}
-                            <div className="mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-200">
-                              <IconComponent
-                                className="w-6 h-6 sm:w-8 sm:h-8"
-                                style={{ color: skill.color }}
-                              />
-                            </div>
-
-                            {/* Skill name */}
-                            <span className="text-[10px] sm:text-xs font-medium text-center text-muted-foreground group-hover:text-primary transition-colors mb-1 leading-tight">
-                              {skill.name}
-                            </span>
-
-                            {/* Proficiency indicator */}
-                            <div className="flex items-center gap-1">
-                              <div
-                                className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${
-                                  proficiencyColors[skill.proficiency]
-                                }`}
-                              />
-                              <span className="text-[8px] sm:text-[10px] text-muted-foreground">
-                                {proficiencyLabels[skill.proficiency]}
+                              {/* Skill name */}
+                              <span className="text-[10px] sm:text-xs font-medium text-center text-muted-foreground group-hover:text-primary transition-colors mb-1 leading-tight">
+                                {skill.name}
                               </span>
-                            </div>
 
-                            {/* Years of experience */}
-                            {skill.yearsOfExperience && (
-                              <span className="text-[8px] sm:text-[10px] text-muted-foreground mt-1">
-                                {skill.yearsOfExperience}+ years
-                              </span>
-                            )}
-
-                            {/* Info icon for description */}
-                            {skill.description && (
-                              <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <uiIcons.info className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-muted-foreground" />
+                              {/* Proficiency indicator */}
+                              <div className="flex items-center gap-1">
+                                <div
+                                  className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${
+                                    proficiencyColors[skill.proficiency]
+                                  }`}
+                                />
+                                <span className="text-[8px] sm:text-[10px] text-muted-foreground">
+                                  {proficiencyLabels[skill.proficiency]}
+                                </span>
                               </div>
-                            )}
-                          </motion.div>
-                        </TooltipTrigger>
-                        <TooltipContent side="top" className="max-w-xs">
-                          <div className="space-y-2">
-                            <h4 className="font-semibold text-sm">
-                              {skill.name}
-                            </h4>
-                            {skill.description && (
-                              <p className="text-xs text-muted-foreground">
-                                {skill.description}
-                              </p>
-                            )}
-                            <div className="flex items-center justify-between text-xs">
-                              <span
-                                className={proficiencyColors[skill.proficiency]}
-                              >
-                                {proficiencyLabels[skill.proficiency]}
-                              </span>
+
+                              {/* Years of experience */}
                               {skill.yearsOfExperience && (
-                                <span className="text-muted-foreground">
+                                <span className="text-[8px] sm:text-[10px] text-muted-foreground mt-1">
                                   {skill.yearsOfExperience}+ years
                                 </span>
                               )}
+
+                              {/* Info icon for description */}
+                              {skill.description && (
+                                <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                  <uiIcons.info className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-muted-foreground" />
+                                </div>
+                              )}
+
+                              {/* Mobile description overlay */}
+                              {skill.description && (
+                                <div className="absolute inset-0 bg-black/80 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:hidden">
+                                  <div className="text-center p-2">
+                                    <p className="text-[8px] text-white leading-tight">
+                                      {skill.description}
+                                    </p>
+                                  </div>
+                                </div>
+                              )}
                             </div>
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
+                          </TooltipTrigger>
+                          <TooltipContent
+                            side="top"
+                            className="max-w-xs z-[9999] hidden sm:block"
+                            sideOffset={5}
+                          >
+                            <div className="space-y-2">
+                              <h4 className="font-semibold text-sm">
+                                {skill.name}
+                              </h4>
+                              {skill.description && (
+                                <p className="text-xs text-muted-foreground">
+                                  {skill.description}
+                                </p>
+                              )}
+                              <div className="flex items-center justify-between text-xs">
+                                <span
+                                  className={
+                                    proficiencyColors[skill.proficiency]
+                                  }
+                                >
+                                  {proficiencyLabels[skill.proficiency]}
+                                </span>
+                                {skill.yearsOfExperience && (
+                                  <span className="text-muted-foreground">
+                                    {skill.yearsOfExperience}+ years
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     );
                   })}
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             );
-          })}
-        </div>
-      </TooltipProvider>
-
-      {/* No results message */}
-      {filteredCategories.length === 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center py-8"
-        >
-          <p className="text-muted-foreground text-sm sm:text-base">
-            No skills match the selected filters.
-          </p>
-          <Button
-            variant="outline"
-            onClick={handleClearFilters}
-            className="mt-3"
-          >
-            Clear All Filters
-          </Button>
-        </motion.div>
-      )}
+          })
+        ) : (
+          <div className="text-center py-8">
+            <p className="text-muted-foreground text-sm sm:text-base">
+              No skills match the selected filters.
+            </p>
+            <Button
+              variant="outline"
+              onClick={handleClearFilters}
+              className="mt-3"
+            >
+              Clear All Filters
+            </Button>
+          </div>
+        )}
+      </div>
     </SectionWrapper>
   );
 });
