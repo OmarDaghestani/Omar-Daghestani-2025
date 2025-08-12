@@ -14,12 +14,6 @@ import {
 } from "@/components/ui/tooltip";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import {
-  motion,
-  staggerContainer,
-  staggerItem,
-  hoverScale,
-} from "@/lib/motion-utils";
 
 const proficiencyColors = {
   beginner: "text-green-400",
