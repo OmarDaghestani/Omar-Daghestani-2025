@@ -75,14 +75,6 @@ export const SkillsSection = memo(function SkillsSection() {
     return result;
   }, [selectedProficiency, selectedCategory]);
 
-  // Calculate total skills
-  const totalSkills = useMemo(() => {
-    return filteredCategories.reduce(
-      (total, category) => total + category.skills.length,
-      0
-    );
-  }, [filteredCategories]);
-
   return (
     <SectionWrapper id="skills">
       <SectionTitle
