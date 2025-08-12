@@ -41,11 +41,12 @@ export function AboutSection() {
         >
           <div className="absolute -inset-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 blur-xl opacity-50 group-hover:opacity-75 transition duration-1000 animate-pulse [animation-duration:4s]" />
           <Image
-            src="/icon.jpg"
+            src="/aboutme.jpg"
             alt="A portrait of Omar Daghestani, a professional developer"
-            width={450}
-            height={450}
+            width={400}
+            height={400}
             className="relative rounded-lg shadow-2xl"
+            priority
           />
         </motion.div>
 

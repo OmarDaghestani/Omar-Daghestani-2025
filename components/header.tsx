@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Menu, X, Code } from "lucide-react";
 import { CursorContext } from "./cursor-context";
@@ -9,7 +9,19 @@ import { NAVIGATION_LINKS } from "@/lib/constants";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { setVariant } = useContext(CursorContext);
+
+  // Handle scroll events to change header opacity
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 50); // Start opacity change after 50px scroll
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent, targetId: string) => {
     e.preventDefault();
@@ -21,13 +33,16 @@ export function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Calculate background opacity based on scroll and menu state
+  const getBackgroundOpacity = () => {
+    if (isMenuOpen) return "bg-background/95"; // Full opacity when menu is open
+    if (isScrolled) return "bg-background/80"; // Reduced opacity when scrolled
+    return "bg-transparent"; // Transparent when at top
+  };
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isMenuOpen
-          ? "bg-background/95 backdrop-blur-md border-b border-white/10"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b border-white/10 ${getBackgroundOpacity()}`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
