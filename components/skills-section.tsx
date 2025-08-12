@@ -4,8 +4,7 @@ import { useState, useMemo, useCallback, memo, useEffect } from "react";
 import { skillIcons, uiIcons } from "@/lib/icon-utils";
 import { skillCategories } from "@/lib/skills-data";
 import { SectionWrapper } from "./section-wrapper";
-import { SectionTitle } from "./section-title";
-import { SkillsFilter, ProficiencyFilter } from "./skills-filter";
+import { ProficiencyFilter } from "./skills-filter";
 import {
   Tooltip,
   TooltipContent,
@@ -13,7 +12,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
 
 const proficiencyColors = {
   beginner: "text-green-400",
@@ -34,7 +32,6 @@ export const SkillsSection = memo(function SkillsSection() {
   const [selectedProficiency, setSelectedProficiency] =
     useState<ProficiencyFilter>("all");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [debugInfo, setDebugInfo] = useState<any>({});
 
   // Memoized event handlers
   const handleSkillSelect = useCallback(
@@ -85,30 +82,8 @@ export const SkillsSection = memo(function SkillsSection() {
     );
   }, [filteredCategories]);
 
-  const categories = useMemo(
-    () =>
-      skillCategories.map(({ title, icon }) => ({
-        title,
-        icon,
-      })),
-    []
-  );
-
   // Debug logging and visible debug info
   useEffect(() => {
-    const debugData = {
-      totalCategories: skillCategories.length,
-      filteredCategories: filteredCategories.length,
-      totalSkills,
-      selectedProficiency,
-      selectedCategory,
-      timestamp: new Date().toLocaleTimeString(),
-      userAgent:
-        typeof window !== "undefined" ? window.navigator.userAgent : "SSR",
-      screenWidth: typeof window !== "undefined" ? window.innerWidth : "SSR",
-      screenHeight: typeof window !== "undefined" ? window.innerHeight : "SSR",
-    };
-
     // Log individual values instead of object
     console.log("=== SKILLS SECTION DEBUG ===");
     console.log("Total Categories:", skillCategories.length);
@@ -132,8 +107,6 @@ export const SkillsSection = memo(function SkillsSection() {
         : "SSR"
     );
     console.log("==========================");
-
-    setDebugInfo(debugData);
   }, [filteredCategories, totalSkills, selectedProficiency, selectedCategory]);
 
   return (
@@ -147,8 +120,8 @@ export const SkillsSection = memo(function SkillsSection() {
         <div>Selected Proficiency: {selectedProficiency}</div>
         <div>Selected Category: {selectedCategory || "None"}</div>
         <div className="text-xs mt-2">
-          If you see this banner, the section is rendering. If skills don't show
-          below, it's a styling issue.
+          If you see this banner, the section is rendering. If skills don&apos;t
+          show below, it&apos;s a styling issue.
         </div>
       </div>
 
