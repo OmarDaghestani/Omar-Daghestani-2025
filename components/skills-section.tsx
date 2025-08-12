@@ -77,10 +77,9 @@ export const SkillsSection = memo(function SkillsSection() {
 
   return (
     <SectionWrapper id="skills">
-      <SectionTitle
-        title="Skills & Technologies"
-        subtitle="A comprehensive overview of my technical expertise and proficiency levels across various domains."
-      />
+      <SectionTitle subtitle="A comprehensive overview of my technical expertise and proficiency levels across various domains.">
+        Skills & Technologies
+      </SectionTitle>
 
       {/* Skills Filter */}
       <SkillsFilter
