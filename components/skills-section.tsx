@@ -34,6 +34,7 @@ export const SkillsSection = memo(function SkillsSection() {
   const [selectedProficiency, setSelectedProficiency] =
     useState<ProficiencyFilter>("all");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [debugInfo, setDebugInfo] = useState<any>({});
 
   // Memoized event handlers
   const handleSkillSelect = useCallback(
@@ -93,202 +94,240 @@ export const SkillsSection = memo(function SkillsSection() {
     []
   );
 
-  // Debug logging
+  // Debug logging and visible debug info
   useEffect(() => {
-    console.log("Skills Section Debug:", {
+    const debugData = {
       totalCategories: skillCategories.length,
       filteredCategories: filteredCategories.length,
       totalSkills,
       selectedProficiency,
       selectedCategory,
-    });
+      timestamp: new Date().toLocaleTimeString(),
+      userAgent:
+        typeof window !== "undefined" ? window.navigator.userAgent : "SSR",
+      screenWidth: typeof window !== "undefined" ? window.innerWidth : "SSR",
+      screenHeight: typeof window !== "undefined" ? window.innerHeight : "SSR",
+    };
+
+    // Log individual values instead of object
+    console.log("=== SKILLS SECTION DEBUG ===");
+    console.log("Total Categories:", skillCategories.length);
+    console.log("Filtered Categories:", filteredCategories.length);
+    console.log("Total Skills:", totalSkills);
+    console.log("Selected Proficiency:", selectedProficiency);
+    console.log("Selected Category:", selectedCategory || "None");
+    console.log("Timestamp:", new Date().toLocaleTimeString());
+    console.log(
+      "Screen Width:",
+      typeof window !== "undefined" ? window.innerWidth : "SSR"
+    );
+    console.log(
+      "Screen Height:",
+      typeof window !== "undefined" ? window.innerHeight : "SSR"
+    );
+    console.log(
+      "User Agent:",
+      typeof window !== "undefined"
+        ? window.navigator.userAgent.substring(0, 50) + "..."
+        : "SSR"
+    );
+    console.log("==========================");
+
+    setDebugInfo(debugData);
   }, [filteredCategories, totalSkills, selectedProficiency, selectedCategory]);
 
   return (
     <SectionWrapper id="skills">
-      {/* Test element to verify section renders */}
-      <div className="bg-red-500 text-white p-2 mb-4 text-center">
-        Skills Section is rendering - {filteredCategories.length} categories
-        found
-      </div>
-
-      <SectionTitle>
-        My Tech <span className="text-primary">Stack</span>
-      </SectionTitle>
-
-      {/* Skills Filter */}
-      <div className="mb-6">
-        <SkillsFilter
-          selectedProficiency={selectedProficiency}
-          onProficiencyChange={setSelectedProficiency}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-          categories={categories}
-        />
-      </div>
-
-      {/* Skills Summary */}
-      <div className="text-center mb-6">
-        <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
-          <Badge variant="outline" className="px-2 sm:px-3 py-1 text-xs">
-            {totalSkills} skills displayed
-          </Badge>
-          <Badge variant="outline" className="px-2 sm:px-3 py-1 text-xs">
-            {filteredCategories.length} categories
-          </Badge>
+      {/* Enhanced Debug Information */}
+      <div className="bg-red-500 text-white p-4 mb-4 text-center space-y-2">
+        <div className="font-bold">🔍 SKILLS SECTION DEBUG</div>
+        <div>Total Categories: {skillCategories.length}</div>
+        <div>Filtered Categories: {filteredCategories.length}</div>
+        <div>Total Skills: {totalSkills}</div>
+        <div>Selected Proficiency: {selectedProficiency}</div>
+        <div>Selected Category: {selectedCategory || "None"}</div>
+        <div className="text-xs mt-2">
+          If you see this banner, the section is rendering. If skills don't show
+          below, it's a styling issue.
         </div>
       </div>
 
-      <div className="space-y-8 min-h-[200px]">
+      {/* Debug: Show raw data */}
+      <div className="bg-blue-500 text-white p-4 mb-4 text-xs">
+        <div className="font-bold">📊 RAW DATA DEBUG</div>
+        <div>
+          Categories: {JSON.stringify(filteredCategories.map((c) => c.title))}
+        </div>
+        <div>
+          First category skills: {filteredCategories[0]?.skills.length || 0}
+        </div>
+      </div>
+
+      <div className="space-y-8 min-h-[200px] border-2 border-green-500 p-4">
         {filteredCategories.length > 0 ? (
-          filteredCategories.map((category) => {
-            const CategoryIcon =
-              skillIcons[category.icon as keyof typeof skillIcons] ||
-              skillIcons.code; // Fallback to Code icon
+          <>
+            <div className="bg-green-500 text-white p-2 text-center">
+              ✅ RENDERING {filteredCategories.length} CATEGORIES
+            </div>
+            {filteredCategories.map((category) => {
+              const CategoryIcon =
+                skillIcons[category.icon as keyof typeof skillIcons] ||
+                skillIcons.code; // Fallback to Code icon
 
-            return (
-              <div key={category.title} className="space-y-4">
-                {/* Category Header */}
-                <div className="text-center space-y-2">
-                  <div className="flex items-center justify-center gap-2">
-                    <CategoryIcon className="w-5 h-5 text-primary" />
-                    <h3 className="text-lg sm:text-xl font-bold text-foreground">
-                      {category.title}
-                    </h3>
+              return (
+                <div
+                  key={category.title}
+                  className="space-y-4 border border-yellow-500 p-2"
+                >
+                  {/* Category Header */}
+                  <div className="text-center space-y-2">
+                    <div className="flex items-center justify-center gap-2">
+                      <CategoryIcon className="w-5 h-5 text-primary" />
+                      <h3 className="text-lg sm:text-xl font-bold text-foreground">
+                        {category.title}
+                      </h3>
+                    </div>
+                    <p className="text-muted-foreground max-w-xl mx-auto text-xs sm:text-sm px-4">
+                      {category.description}
+                    </p>
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                        {category.skills.length} skill
+                        {category.skills.length !== 1 ? "s" : ""}
+                      </span>
+                    </div>
                   </div>
-                  <p className="text-muted-foreground max-w-xl mx-auto text-xs sm:text-sm px-4">
-                    {category.description}
-                  </p>
-                  <div className="flex items-center justify-center gap-2">
-                    <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
-                      {category.skills.length} skill
-                      {category.skills.length !== 1 ? "s" : ""}
-                    </span>
-                  </div>
-                </div>
 
-                {/* Responsive Grid Layout - Improved for mobile */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3">
-                  {category.skills.map((skill) => {
-                    const IconComponent =
-                      skillIcons[skill.icon as keyof typeof skillIcons] ||
-                      skillIcons.code; // Fallback to Code icon
-                    const isSelected = selectedSkill === skill.name;
+                  {/* Responsive Grid Layout - Improved for mobile */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 border border-purple-500 p-2">
+                    <div className="bg-purple-500 text-white p-1 text-center text-xs">
+                      GRID CONTAINER - {category.skills.length} SKILLS
+                    </div>
+                    {category.skills.map((skill) => {
+                      const IconComponent =
+                        skillIcons[skill.icon as keyof typeof skillIcons] ||
+                        skillIcons.code; // Fallback to Code icon
+                      const isSelected = selectedSkill === skill.name;
 
-                    return (
-                      <TooltipProvider key={skill.name}>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div
-                              className={`group relative flex flex-col items-center justify-center p-2 sm:p-3 bg-white/5 border rounded-lg backdrop-blur-md shadow-sm cursor-pointer transition-all duration-300 ${
-                                skill.isHighlighted
-                                  ? "border-primary/50 bg-primary/5"
-                                  : "border-white/10"
-                              } ${
-                                isSelected
-                                  ? "border-primary bg-primary/10 scale-105"
-                                  : "hover:border-primary/30 hover:bg-primary/5"
-                              }`}
-                              onClick={() => handleSkillSelect(skill.name)}
-                            >
-                              {/* Highlighted indicator */}
-                              {skill.isHighlighted && (
-                                <div className="absolute -top-1 -right-1">
-                                  <uiIcons.star className="w-3 h-3 text-primary fill-primary" />
-                                </div>
-                              )}
-
-                              {/* Icon */}
-                              <div className="mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-200">
-                                <IconComponent
-                                  className="w-6 h-6 sm:w-8 sm:h-8"
-                                  style={{ color: skill.color }}
-                                />
-                              </div>
-
-                              {/* Skill name */}
-                              <span className="text-[10px] sm:text-xs font-medium text-center text-muted-foreground group-hover:text-primary transition-colors mb-1 leading-tight">
-                                {skill.name}
-                              </span>
-
-                              {/* Proficiency indicator */}
-                              <div className="flex items-center gap-1">
-                                <div
-                                  className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${
-                                    proficiencyColors[skill.proficiency]
-                                  }`}
-                                />
-                                <span className="text-[8px] sm:text-[10px] text-muted-foreground">
-                                  {proficiencyLabels[skill.proficiency]}
-                                </span>
-                              </div>
-
-                              {/* Years of experience */}
-                              {skill.yearsOfExperience && (
-                                <span className="text-[8px] sm:text-[10px] text-muted-foreground mt-1">
-                                  {skill.yearsOfExperience}+ years
-                                </span>
-                              )}
-
-                              {/* Info icon for description */}
-                              {skill.description && (
-                                <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                  <uiIcons.info className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-muted-foreground" />
-                                </div>
-                              )}
-
-                              {/* Mobile description overlay */}
-                              {skill.description && (
-                                <div className="absolute inset-0 bg-black/80 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:hidden">
-                                  <div className="text-center p-2">
-                                    <p className="text-[8px] text-white leading-tight">
-                                      {skill.description}
-                                    </p>
+                      return (
+                        <TooltipProvider key={skill.name}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div
+                                className={`group relative flex flex-col items-center justify-center p-2 sm:p-3 bg-white/5 border rounded-lg backdrop-blur-md shadow-sm cursor-pointer transition-all duration-300 ${
+                                  skill.isHighlighted
+                                    ? "border-primary/50 bg-primary/5"
+                                    : "border-white/10"
+                                } ${
+                                  isSelected
+                                    ? "border-primary bg-primary/10 scale-105"
+                                    : "hover:border-primary/30 hover:bg-primary/5"
+                                }`}
+                                onClick={() => handleSkillSelect(skill.name)}
+                              >
+                                {/* Highlighted indicator */}
+                                {skill.isHighlighted && (
+                                  <div className="absolute -top-1 -right-1">
+                                    <uiIcons.star className="w-3 h-3 text-primary fill-primary" />
                                   </div>
+                                )}
+
+                                {/* Icon */}
+                                <div className="mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-200">
+                                  <IconComponent
+                                    className="w-6 h-6 sm:w-8 sm:h-8"
+                                    style={{ color: skill.color }}
+                                  />
                                 </div>
-                              )}
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent
-                            side="top"
-                            className="max-w-xs z-[9999] hidden sm:block"
-                            sideOffset={5}
-                          >
-                            <div className="space-y-2">
-                              <h4 className="font-semibold text-sm">
-                                {skill.name}
-                              </h4>
-                              {skill.description && (
-                                <p className="text-xs text-muted-foreground">
-                                  {skill.description}
-                                </p>
-                              )}
-                              <div className="flex items-center justify-between text-xs">
-                                <span
-                                  className={
-                                    proficiencyColors[skill.proficiency]
-                                  }
-                                >
-                                  {proficiencyLabels[skill.proficiency]}
+
+                                {/* Skill name */}
+                                <span className="text-[10px] sm:text-xs font-medium text-center text-muted-foreground group-hover:text-primary transition-colors mb-1 leading-tight">
+                                  {skill.name}
                                 </span>
+
+                                {/* Proficiency indicator */}
+                                <div className="flex items-center gap-1">
+                                  <div
+                                    className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${
+                                      proficiencyColors[skill.proficiency]
+                                    }`}
+                                  />
+                                  <span className="text-[8px] sm:text-[10px] text-muted-foreground">
+                                    {proficiencyLabels[skill.proficiency]}
+                                  </span>
+                                </div>
+
+                                {/* Years of experience */}
                                 {skill.yearsOfExperience && (
-                                  <span className="text-muted-foreground">
+                                  <span className="text-[8px] sm:text-[10px] text-muted-foreground mt-1">
                                     {skill.yearsOfExperience}+ years
                                   </span>
                                 )}
+
+                                {/* Info icon for description */}
+                                {skill.description && (
+                                  <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <uiIcons.info className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-muted-foreground" />
+                                  </div>
+                                )}
+
+                                {/* Mobile description overlay */}
+                                {skill.description && (
+                                  <div className="absolute inset-0 bg-black/80 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:hidden">
+                                    <div className="text-center p-2">
+                                      <p className="text-[8px] text-white leading-tight">
+                                        {skill.description}
+                                      </p>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
-                            </div>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    );
-                  })}
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="top"
+                              className="max-w-xs z-[9999] hidden sm:block"
+                              sideOffset={5}
+                            >
+                              <div className="space-y-2">
+                                <h4 className="font-semibold text-sm">
+                                  {skill.name}
+                                </h4>
+                                {skill.description && (
+                                  <p className="text-xs text-muted-foreground">
+                                    {skill.description}
+                                  </p>
+                                )}
+                                <div className="flex items-center justify-between text-xs">
+                                  <span
+                                    className={
+                                      proficiencyColors[skill.proficiency]
+                                    }
+                                  >
+                                    {proficiencyLabels[skill.proficiency]}
+                                  </span>
+                                  {skill.yearsOfExperience && (
+                                    <span className="text-muted-foreground">
+                                      {skill.yearsOfExperience}+ years
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
-          })
+              );
+            })}
+          </>
         ) : (
           <div className="text-center py-8">
+            <div className="bg-yellow-500 text-black p-4 mb-4">
+              ⚠️ NO CATEGORIES FOUND - This means the filtering is removing all
+              categories
+            </div>
             <p className="text-muted-foreground text-sm sm:text-base">
               No skills match the selected filters.
             </p>
