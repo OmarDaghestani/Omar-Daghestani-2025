@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo, useCallback, memo, useEffect } from "react";
+import { useState, useMemo, useCallback, memo } from "react";
 import { skillIcons, uiIcons } from "@/lib/icon-utils";
 import { skillCategories } from "@/lib/skills-data";
 import { SectionWrapper } from "./section-wrapper";
-import { ProficiencyFilter } from "./skills-filter";
+import { SectionTitle } from "./section-title";
+import { SkillsFilter, ProficiencyFilter } from "./skills-filter";
 import {
   Tooltip,
   TooltipContent,
@@ -82,78 +83,35 @@ export const SkillsSection = memo(function SkillsSection() {
     );
   }, [filteredCategories]);
 
-  // Debug logging and visible debug info
-  useEffect(() => {
-    // Log individual values instead of object
-    console.log("=== SKILLS SECTION DEBUG ===");
-    console.log("Total Categories:", skillCategories.length);
-    console.log("Filtered Categories:", filteredCategories.length);
-    console.log("Total Skills:", totalSkills);
-    console.log("Selected Proficiency:", selectedProficiency);
-    console.log("Selected Category:", selectedCategory || "None");
-    console.log("Timestamp:", new Date().toLocaleTimeString());
-    console.log(
-      "Screen Width:",
-      typeof window !== "undefined" ? window.innerWidth : "SSR"
-    );
-    console.log(
-      "Screen Height:",
-      typeof window !== "undefined" ? window.innerHeight : "SSR"
-    );
-    console.log(
-      "User Agent:",
-      typeof window !== "undefined"
-        ? window.navigator.userAgent.substring(0, 50) + "..."
-        : "SSR"
-    );
-    console.log("==========================");
-  }, [filteredCategories, totalSkills, selectedProficiency, selectedCategory]);
-
-  console.log("SKILLS SECTION RENDERING - Component is mounting!");
-
   return (
     <SectionWrapper id="skills">
-      {/* Enhanced Debug Information */}
-      <div className="bg-red-500 text-white p-4 mb-4 text-center space-y-2">
-        <div className="font-bold">🔍 SKILLS SECTION DEBUG</div>
-        <div>Total Categories: {skillCategories.length}</div>
-        <div>Filtered Categories: {filteredCategories.length}</div>
-        <div>Total Skills: {totalSkills}</div>
-        <div>Selected Proficiency: {selectedProficiency}</div>
-        <div>Selected Category: {selectedCategory || "None"}</div>
-        <div className="text-xs mt-2">
-          If you see this banner, the section is rendering. If skills don&apos;t
-          show below, it&apos;s a styling issue.
-        </div>
-      </div>
+      <SectionTitle
+        title="Skills & Technologies"
+        subtitle="A comprehensive overview of my technical expertise and proficiency levels across various domains."
+      />
 
-      {/* Debug: Show raw data */}
-      <div className="bg-blue-500 text-white p-4 mb-4 text-xs">
-        <div className="font-bold">📊 RAW DATA DEBUG</div>
-        <div>
-          Categories: {JSON.stringify(filteredCategories.map((c) => c.title))}
-        </div>
-        <div>
-          First category skills: {filteredCategories[0]?.skills.length || 0}
-        </div>
-      </div>
+      {/* Skills Filter */}
+      <SkillsFilter
+        selectedProficiency={selectedProficiency}
+        onProficiencyChange={setSelectedProficiency}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        categories={skillCategories.map((cat) => ({
+          title: cat.title,
+          icon: cat.icon,
+        }))}
+      />
 
-      <div className="space-y-8 min-h-[200px] border-2 border-green-500 p-4">
+      <div className="space-y-8">
         {filteredCategories.length > 0 ? (
           <>
-            <div className="bg-green-500 text-white p-2 text-center">
-              ✅ RENDERING {filteredCategories.length} CATEGORIES
-            </div>
             {filteredCategories.map((category) => {
               const CategoryIcon =
                 skillIcons[category.icon as keyof typeof skillIcons] ||
                 skillIcons.code; // Fallback to Code icon
 
               return (
-                <div
-                  key={category.title}
-                  className="space-y-4 border border-yellow-500 p-2"
-                >
+                <div key={category.title} className="space-y-4">
                   {/* Category Header */}
                   <div className="text-center space-y-2">
                     <div className="flex items-center justify-center gap-2">
@@ -174,10 +132,7 @@ export const SkillsSection = memo(function SkillsSection() {
                   </div>
 
                   {/* Responsive Grid Layout - Improved for mobile */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 border border-purple-500 p-2">
-                    <div className="bg-purple-500 text-white p-1 text-center text-xs">
-                      GRID CONTAINER - {category.skills.length} SKILLS
-                    </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3">
                     {category.skills.map((skill) => {
                       const IconComponent =
                         skillIcons[skill.icon as keyof typeof skillIcons] ||
@@ -299,10 +254,6 @@ export const SkillsSection = memo(function SkillsSection() {
           </>
         ) : (
           <div className="text-center py-8">
-            <div className="bg-yellow-500 text-black p-4 mb-4">
-              ⚠️ NO CATEGORIES FOUND - This means the filtering is removing all
-              categories
-            </div>
             <p className="text-muted-foreground text-sm sm:text-base">
               No skills match the selected filters.
             </p>
