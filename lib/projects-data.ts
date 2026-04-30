@@ -46,7 +46,7 @@ export const projects: Project[] = [
       "Prisma",
       "Tailwind CSS",
     ],
-    githubUrl: "https://github.com/OmarDaghestani/ecommerce-platform",
+    githubUrl: "https://github.com/OmarDaghestani/d424",
     liveUrl: "https://ecom.omar-daghestani.com/",
     problem:
       "Small businesses need a cost-effective, scalable e-commerce solution that provides enterprise-level features without the complexity of traditional platforms.",

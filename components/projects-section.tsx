@@ -1,6 +1,5 @@
 "use client";
 
-import { useCallback } from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import {
@@ -33,10 +32,6 @@ import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
 
 export function ProjectsSection() {
-  const handleCarouselSelect = useCallback(() => {
-    // Handle carousel selection if needed
-  }, []);
-
   return (
     <SectionWrapper id="projects">
       <SectionTitle subtitle="Here are some of my recent projects that showcase my skills in full-stack development, user experience design, and problem-solving.">
@@ -46,22 +41,21 @@ export function ProjectsSection() {
       <Carousel
         opts={{
           align: "start",
-          loop: true,
+          loop: false,
         }}
         className="w-full"
-        onSelect={handleCarouselSelect}
       >
         <CarouselContent className="-ml-2 md:-ml-4">
           {projects.map((project, index) => (
             <CarouselItem
-              key={index}
+              key={project.title}
               className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 h-full"
             >
               <div className="p-1 h-full">
                 <Dialog>
                   <DialogTrigger asChild>
                     <div>
-                      <Card className="group overflow-hidden bg-card/50 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 project-card">
+                      <Card className="group overflow-hidden bg-card/50 border-white/10 hover:border-primary/50 transition-colors duration-300 project-card">
                         <CardContent className="p-0 project-card-content">
                           <div className="relative overflow-hidden">
                             <Image
@@ -71,6 +65,7 @@ export function ProjectsSection() {
                               height={450}
                               className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                               priority={index < 2}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                               <div className="flex items-center gap-2 text-white border border-white/50 rounded-full px-4 py-2">
