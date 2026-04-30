@@ -9,7 +9,7 @@
   --card-foreground: 222.2 84% 4.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
+  --primary: 222 72% 54%;
   --primary-foreground: 210 40% 98%;
   --secondary: 210 40% 96%;
   --secondary-foreground: 222.2 84% 4.9%;
@@ -21,7 +21,7 @@
   --destructive-foreground: 210 40% 98%;
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
+  --ring: 222 72% 54%;
   --radius: 0.5rem;
 }
 
@@ -32,7 +32,7 @@
   --card-foreground: 210 40% 98%;
   --popover: 222.2 84% 4.9%;
   --popover-foreground: 210 40% 98%;
-  --primary: 210 40% 98%;
+  --primary: 222 72% 62%;
   --primary-foreground: 222.2 47.4% 11.2%;
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
@@ -44,7 +44,7 @@
   --destructive-foreground: 210 40% 98%;
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
-  --ring: 212.7 26.8% 83.9%;
+  --ring: 222 72% 62%;
 }
 
 @layer base {
@@ -54,6 +54,7 @@
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
+    text-wrap: pretty;
   }
   html {
     scroll-padding-top: 5rem; /* Account for fixed header */
@@ -71,6 +72,24 @@
 }
 
 @layer utilities {
+  .page-shell {
+    background-image:
+      radial-gradient(circle at 10% 12%, hsl(var(--primary) / 0.12), transparent 38%),
+      radial-gradient(circle at 80% 22%, hsl(278 85% 65% / 0.08), transparent 35%);
+  }
+
+  .section-surface {
+    @apply rounded-2xl border border-border/60 bg-card/30 backdrop-blur-sm;
+  }
+
+  .story-divider {
+    @apply my-16 h-px w-full bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
   .animated-background {
     position: relative;
     width: 100%;

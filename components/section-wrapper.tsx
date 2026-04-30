@@ -21,7 +21,7 @@ export function SectionWrapper({
   return (
     <section
       id={id}
-      className={`w-full py-12 sm:py-16 md:py-24 lg:py-32 ${background} ${className}`}
+      className={`w-full py-14 sm:py-18 md:py-24 lg:py-28 ${background} ${className}`}
     >
       <motion.div
         className={`container mx-auto px-4 sm:px-6 lg:px-8 ${containerClassName}`}

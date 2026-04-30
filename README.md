@@ -191,6 +191,14 @@ The portfolio includes built-in performance monitoring for:
 - **FID** (First Input Delay)
 - **CLS** (Cumulative Layout Shift)
 
+Enable runtime performance monitoring only when needed:
+
+```bash
+NEXT_PUBLIC_ENABLE_PERF_MONITOR=true npm run dev
+```
+
+By default, runtime monitoring is disabled.
+
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
@@ -224,6 +232,10 @@ The app can be deployed to any platform that supports Next.js:
 - `ANALYZE=true npm run build` - Build with bundle analysis
 
 ## 🔧 Development
+
+### Cursor Agent Workflow
+
+- See `docs/cursor-agent-workflow.md` for mode-routing, prompt templates, and execution guardrails.
 
 ### Code Quality
 

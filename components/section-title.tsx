@@ -33,7 +33,7 @@ export function SectionTitle({
         {children}
       </h2>
       {subtitle && (
-        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+        <p className="mx-auto max-w-2xl px-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
           {subtitle}
         </p>
       )}

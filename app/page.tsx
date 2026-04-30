@@ -74,10 +74,13 @@ const Footer = dynamic(
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="page-shell flex min-h-screen flex-col bg-background">
       <Header />
       <main className="flex-1">
         <HeroSection />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="story-divider" aria-hidden="true" />
+        </div>
         <AboutSection />
         <SkillsSection />
         <ProjectsSection />

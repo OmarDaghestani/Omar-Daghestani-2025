@@ -1,0 +1,26 @@
+---
+description: Route tasks to the right Cursor mode/subagent
+alwaysApply: false
+---
+
+Use this routing guide before starting work:
+
+1) Pick mode first.
+- Use Plan mode when a request spans multiple files, includes unclear requirements, or has meaningful trade-offs.
+- Use Agent mode when scope is explicit and implementation is straightforward.
+
+2) Choose subagents only when they add leverage.
+- Use `explore` to map unknown code paths before editing.
+- Use `shell` for command-heavy operations (lint/build/test/release checks).
+- Use `cursor-guide` for Cursor-product usage questions.
+
+3) Parallelize only independent streams.
+- Good: implementation in one stream + verification in another.
+- Avoid parallelizing tasks that edit the same files.
+
+4) Verification is required.
+- For code changes, run `npm run lint` at minimum.
+- For behavior-sensitive changes, include a targeted runtime check and report result.
+
+5) Output contract.
+- End with: what changed, files touched, verification run, and follow-up options.
