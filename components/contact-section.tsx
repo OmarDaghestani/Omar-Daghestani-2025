@@ -22,9 +22,28 @@ export function ContactSection() {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
+  const [copyStatus, setCopyStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
-  const handleEmailClick = () => {
-    navigator.clipboard.writeText("omar.daghest@gmail.com");
+  const handleEmailClick = async () => {
+    try {
+      await navigator.clipboard.writeText("omar.daghest@gmail.com");
+      setCopyStatus({
+        type: "success",
+        message: "Email address copied to clipboard.",
+      });
+    } catch {
+      setCopyStatus({
+        type: "error",
+        message: "Could not copy email. Please copy it manually.",
+      });
+    }
+
+    setTimeout(() => {
+      setCopyStatus({ type: null, message: "" });
+    }, 3000);
   };
 
   const handleInputChange = (
@@ -157,6 +176,8 @@ export function ContactSection() {
               {/* Status Message */}
               {submitStatus.type && (
                 <div
+                  role="status"
+                  aria-live="polite"
                   className={`p-3 rounded-lg text-sm ${
                     submitStatus.type === "success"
                       ? "bg-green-500/10 border border-green-500/20 text-green-400"
@@ -239,11 +260,25 @@ export function ContactSection() {
           <div className="pt-6">
             <Button
               onClick={handleEmailClick}
+              type="button"
               variant="outline"
               className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               Copy Email Address
             </Button>
+            {copyStatus.type && (
+              <p
+                role="status"
+                aria-live="polite"
+                className={`text-sm ${
+                  copyStatus.type === "success"
+                    ? "text-green-400"
+                    : "text-red-400"
+                }`}
+              >
+                {copyStatus.message}
+              </p>
+            )}
           </div>
         </motion.div>
       </div>
