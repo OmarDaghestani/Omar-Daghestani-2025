@@ -5,15 +5,13 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import { useContext, useState } from "react";
-import { CursorContext } from "./cursor-context";
+import { useState } from "react";
 import { SocialLinks } from "./social-links";
 import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
 import { sendContactEmail, ContactFormData } from "../lib/contact-utils";
 
 export function ContactSection() {
-  const { setVariant } = useContext(CursorContext);
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -174,8 +172,6 @@ export function ContactSection() {
                 size="lg"
                 disabled={isSubmitting}
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed"
-                onMouseEnter={() => setVariant("hover")}
-                onMouseLeave={() => setVariant("default")}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
@@ -244,9 +240,7 @@ export function ContactSection() {
             <Button
               onClick={handleEmailClick}
               variant="outline"
-              className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-default"
-              onMouseEnter={() => setVariant("hover")}
-              onMouseLeave={() => setVariant("default")}
+              className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               Copy Email Address
             </Button>

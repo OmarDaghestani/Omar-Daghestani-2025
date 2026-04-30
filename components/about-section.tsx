@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useContext } from "react";
-import { CursorContext } from "./cursor-context";
 import { Button } from "./ui/button";
 import { scrollToSection } from "@/lib/scroll-utils";
 import { SectionWrapper } from "./section-wrapper";
@@ -20,8 +18,6 @@ const textVariants = {
 };
 
 export function AboutSection() {
-  const { setVariant } = useContext(CursorContext);
-
   const handleContactClick = () => {
     scrollToSection("#contact");
   };
@@ -34,10 +30,8 @@ export function AboutSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <motion.div
-          className="relative flex justify-center cursor-default"
+          className="relative flex justify-center"
           variants={imageVariants}
-          onMouseEnter={() => setVariant("hover")}
-          onMouseLeave={() => setVariant("default")}
         >
           <div className="absolute -inset-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 blur-xl opacity-50 group-hover:opacity-75 transition duration-1000 animate-pulse [animation-duration:4s]" />
           <Image
@@ -71,16 +65,8 @@ export function AboutSection() {
             problem-solving skills on winding trails, and an amateur chef, which
             fosters creativity and precision—traits I bring to every project.
           </motion.p>
-          <motion.div
-            variants={textVariants}
-            onMouseEnter={() => setVariant("hover")}
-            onMouseLeave={() => setVariant("default")}
-          >
-            <Button
-              size="lg"
-              className="mt-4 cursor-default"
-              onClick={handleContactClick}
-            >
+          <motion.div variants={textVariants}>
+            <Button size="lg" className="mt-4" onClick={handleContactClick}>
               Let&apos;s Connect
             </Button>
           </motion.div>

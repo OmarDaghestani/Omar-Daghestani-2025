@@ -5,11 +5,18 @@ export const useScroll = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    let previousIsScrolled = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const nextIsScrolled = window.scrollY > 10;
+      if (nextIsScrolled === previousIsScrolled) return;
+      previousIsScrolled = nextIsScrolled;
+      setIsScrolled(nextIsScrolled);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

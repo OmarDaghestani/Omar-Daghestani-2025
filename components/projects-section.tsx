@@ -1,7 +1,6 @@
 "use client";
 
-import { useContext, useCallback } from "react";
-import { CursorContext } from "./cursor-context";
+import { useCallback } from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import {
@@ -34,8 +33,6 @@ import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
 
 export function ProjectsSection() {
-  const { setVariant } = useContext(CursorContext);
-
   const handleCarouselSelect = useCallback(() => {
     // Handle carousel selection if needed
   }, []);
@@ -63,11 +60,7 @@ export function ProjectsSection() {
               <div className="p-1 h-full">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div
-                      onMouseEnter={() => setVariant("hover")}
-                      onMouseLeave={() => setVariant("default")}
-                      className="cursor-default"
-                    >
+                    <div>
                       <Card className="group overflow-hidden bg-card/50 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 project-card">
                         <CardContent className="p-0 project-card-content">
                           <div className="relative overflow-hidden">
@@ -175,8 +168,6 @@ export function ProjectsSection() {
                         <Button
                           asChild
                           className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base"
-                          onMouseEnter={() => setVariant("hover")}
-                          onMouseLeave={() => setVariant("default")}
                         >
                           <a
                             href={project.liveUrl}
@@ -191,8 +182,6 @@ export function ProjectsSection() {
                           asChild
                           variant="outline"
                           className="flex-1 text-sm sm:text-base"
-                          onMouseEnter={() => setVariant("hover")}
-                          onMouseLeave={() => setVariant("default")}
                         >
                           <a
                             href={project.githubUrl}
@@ -214,7 +203,7 @@ export function ProjectsSection() {
 
         {/* Carousel Navigation with Visual Indicators */}
         <div className="flex items-center justify-between mt-6 sm:mt-8">
-          <CarouselPrevious className="relative static sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-12" />
+          <CarouselPrevious className="static sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-12" />
 
           {/* Project Counter and Swipe Indicator */}
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -240,7 +229,7 @@ export function ProjectsSection() {
             </div>
           </div>
 
-          <CarouselNext className="relative static sm:absolute sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-12" />
+          <CarouselNext className="static sm:absolute sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-12" />
         </div>
       </Carousel>
     </SectionWrapper>

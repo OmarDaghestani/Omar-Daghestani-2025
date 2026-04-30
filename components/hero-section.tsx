@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { useContext } from "react";
-import { CursorContext } from "./cursor-context";
 import { scrollToSection } from "@/lib/scroll-utils";
 import { SocialLinks } from "./social-links";
 import { RESUME_URL } from "@/lib/constants";
@@ -46,8 +44,6 @@ const itemVariants = {
 };
 
 export function HeroSection() {
-  const { setVariant } = useContext(CursorContext);
-
   const handleContactClick = () => {
     scrollToSection("#contact");
   };
@@ -121,9 +117,7 @@ export function HeroSection() {
             >
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_hsl(var(--primary))] cursor-default"
-                onMouseEnter={() => setVariant("hover")}
-                onMouseLeave={() => setVariant("default")}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_hsl(var(--primary))]"
                 onClick={handleContactClick}
               >
                 Contact Me
@@ -132,9 +126,7 @@ export function HeroSection() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--primary))] cursor-default"
-                onMouseEnter={() => setVariant("hover")}
-                onMouseLeave={() => setVariant("default")}
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_hsl(var(--primary))]"
               >
                 <a href={RESUME_URL} download>
                   <Download className="w-4 h-4 mr-2" />
@@ -152,11 +144,9 @@ export function HeroSection() {
           >
             <div className="w-72 h-72 md:w-96 md:h-96 rounded-full bg-primary/10 blur-3xl animate-pulse [animation-duration:4s]" />
             <motion.div
-              className="relative rounded-full p-1 cursor-default"
+              className="relative rounded-full p-1"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              onMouseEnter={() => setVariant("hover")}
-              onMouseLeave={() => setVariant("default")}
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 animate-spin [animation-duration:4s]" />
               <Image

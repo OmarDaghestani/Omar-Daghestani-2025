@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { CustomCursor } from "@/components/custom-cursor";
-import { CursorProvider } from "@/components/cursor-context";
 import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator";
 import { PerformanceMonitor } from "@/components/performance-monitor";
 
@@ -55,18 +53,15 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased cursor-none md:cursor-none",
+          "min-h-screen bg-background font-sans antialiased",
           inter.variable
         )}
       >
-        <CursorProvider>
-          <div className="animated-background noise-texture">
-            <CustomCursor />
-            <ScrollProgressIndicator />
-            <PerformanceMonitor />
-            {children}
-          </div>
-        </CursorProvider>
+        <div className="animated-background noise-texture">
+          <ScrollProgressIndicator />
+          <PerformanceMonitor />
+          {children}
+        </div>
       </body>
     </html>
   );

@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
-import { useContext } from "react";
-import { CursorContext } from "./cursor-context";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 const socialIconMap = {
@@ -21,8 +19,6 @@ export function SocialLinks({
   className = "",
   iconSize = "h-8 w-8",
 }: SocialLinksProps) {
-  const { setVariant } = useContext(CursorContext);
-
   return (
     <div className={`flex items-center gap-4 ${className}`}>
       {SOCIAL_LINKS.map((social) => {
@@ -41,9 +37,7 @@ export function SocialLinks({
             }}
             whileTap={{ scale: 0.95 }}
             rel={social.icon === "mail" ? undefined : "noreferrer"}
-            className="text-muted-foreground cursor-default"
-            onMouseEnter={() => setVariant("hover")}
-            onMouseLeave={() => setVariant("default")}
+            className="text-muted-foreground"
           >
             <IconComponent className={iconSize} />
           </motion.a>
