@@ -9,8 +9,8 @@
   --card-foreground: 222.2 84% 4.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
-  --primary: 222 72% 54%;
-  --primary-foreground: 210 40% 98%;
+  --primary: 173 80% 32%;
+  --primary-foreground: 0 0% 100%;
   --secondary: 210 40% 96%;
   --secondary-foreground: 222.2 84% 4.9%;
   --muted: 210 40% 96%;
@@ -21,19 +21,19 @@
   --destructive-foreground: 210 40% 98%;
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 222 72% 54%;
+  --ring: 173 80% 32%;
   --radius: 0.5rem;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
+  --background: 222 47% 5%;
   --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
+  --card: 222 40% 8%;
   --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
+  --popover: 222 47% 6%;
   --popover-foreground: 210 40% 98%;
-  --primary: 222 72% 62%;
-  --primary-foreground: 222.2 47.4% 11.2%;
+  --primary: 168 76% 52%;
+  --primary-foreground: 222 47% 7%;
   --secondary: 217.2 32.6% 17.5%;
   --secondary-foreground: 210 40% 98%;
   --muted: 217.2 32.6% 17.5%;
@@ -44,7 +44,7 @@
   --destructive-foreground: 210 40% 98%;
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
-  --ring: 222 72% 62%;
+  --ring: 168 76% 52%;
 }
 
 @layer base {
@@ -75,11 +75,19 @@
   .page-shell {
     background-image:
       radial-gradient(circle at 10% 12%, hsl(var(--primary) / 0.12), transparent 38%),
-      radial-gradient(circle at 80% 22%, hsl(278 85% 65% / 0.08), transparent 35%);
+      radial-gradient(circle at 80% 22%, hsl(230 85% 65% / 0.08), transparent 35%);
   }
 
   .section-surface {
     @apply rounded-2xl border border-border/60 bg-card/30 backdrop-blur-sm;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs font-medium uppercase tracking-[0.14em];
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-sky-400 to-indigo-400 bg-clip-text text-transparent;
   }
 
   .story-divider {
@@ -110,7 +118,7 @@
       ),
       radial-gradient(
         circle at 75% 75%,
-        hsl(280 60% 50% / 0.15),
+        hsl(230 70% 55% / 0.12),
         transparent 40%
       );
     animation: move-glow 20s linear infinite;

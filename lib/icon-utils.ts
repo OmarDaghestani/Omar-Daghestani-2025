@@ -29,6 +29,7 @@ import {
   PenTool,
   ArrowLeft,
   ArrowRight,
+  ShieldCheck,
 } from "lucide-react";
 
 // Icon mapping for skills
@@ -48,6 +49,8 @@ export const skillIcons = {
   container: Container,
   flame: Flame,
   zap: Zap,
+  sparkles: Sparkles,
+  shield: ShieldCheck,
 } as const;
 
 // UI icons
@@ -99,4 +102,5 @@ export {
   PenTool,
   ArrowLeft,
   ArrowRight,
+  ShieldCheck,
 };

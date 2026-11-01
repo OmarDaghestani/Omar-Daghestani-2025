@@ -39,16 +39,16 @@ export function Header() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        // The root margin leaves a thin band across the viewport, so at most
+        // one section crosses it at a time; any intersection marks it active.
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
 
         if (!visibleEntry) return;
         setActiveSection(`#${visibleEntry.target.id}`);
       },
       {
         rootMargin: "-35% 0px -55% 0px",
-        threshold: [0.2, 0.4, 0.6],
+        threshold: 0,
       }
     );
 
@@ -83,7 +83,7 @@ export function Header() {
           {/* Logo */}
           <button
             onClick={(e) => handleNavClick(e, "#home")}
-            className="focus-ring flex items-center gap-2 rounded-md text-2xl font-bold text-foreground transition-colors hover:text-primary"
+            className="focus-ring flex items-center gap-2 rounded-md text-xl font-bold text-foreground transition-colors hover:text-primary"
           >
             <Code className="w-7 h-7 text-primary" />
             <span>Omar Daghestani</span>
@@ -96,7 +96,7 @@ export function Header() {
                 key={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 aria-current={activeSection === link.href ? "page" : undefined}
-                className={`focus-ring relative rounded-md px-4 py-2 text-lg font-medium transition-colors ${
+                className={`focus-ring relative rounded-md px-3 py-2 text-base font-medium transition-colors ${
                   activeSection === link.href
                     ? "text-primary"
                     : "text-muted-foreground hover:text-primary"

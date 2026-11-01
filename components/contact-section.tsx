@@ -10,6 +10,8 @@ import { SocialLinks } from "./social-links";
 import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
 import { sendContactEmail, ContactFormData } from "../lib/contact-utils";
+import { CONTACT_EMAIL } from "@/lib/constants";
+import { Briefcase, Mail, MapPin } from "lucide-react";
 
 export function ContactSection() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -29,7 +31,7 @@ export function ContactSection() {
 
   const handleEmailClick = async () => {
     try {
-      await navigator.clipboard.writeText("omar.daghest@gmail.com");
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
       setCopyStatus({
         type: "success",
         message: "Email address copied to clipboard.",
@@ -110,8 +112,11 @@ export function ContactSection() {
 
   return (
     <SectionWrapper id="contact" background="bg-secondary/30">
-      <SectionTitle subtitle="I'm always interested in new opportunities and exciting projects. Whether you have a question or just want to say hi, feel free to reach out!">
-        Get In <span className="text-primary">Touch</span>
+      <SectionTitle
+        eyebrow="Contact"
+        subtitle="Have a workflow that should run itself, or a role where this kind of work matters? I'd like to hear about it."
+      >
+        Let&apos;s <span className="text-primary">talk</span>
       </SectionTitle>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -166,7 +171,7 @@ export function ContactSection() {
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  placeholder="Tell me about your project..."
+                  placeholder="What are you trying to automate?"
                   rows={6}
                   className="bg-transparent border-white/20 focus:ring-2 focus:ring-primary/50 focus:ring-offset-0 focus:border-primary/50 resize-none"
                   required
@@ -211,49 +216,55 @@ export function ContactSection() {
           <div>
             <h3 className="text-2xl font-bold mb-6">Let&apos;s Connect</h3>
             <p className="text-lg text-muted-foreground mb-8">
-              I&apos;m always open to discussing new projects, creative ideas,
-              or opportunities to be part of your visions.
+              I take on a small number of automation and AI engagements through
+              Nexus Code, and I&apos;m open to full-time AI and automation
+              engineering roles.
             </p>
           </div>
 
           <div className="space-y-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <span className="text-primary font-semibold">📧</span>
+                <Mail className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h4 className="font-semibold text-foreground">Email</h4>
-                <p className="text-muted-foreground">omar.daghest@gmail.com</p>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {CONTACT_EMAIL}
+                </a>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <span className="text-primary font-semibold">📍</span>
+                <MapPin className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h4 className="font-semibold text-foreground">Location</h4>
                 <p className="text-muted-foreground">
-                  Available for remote work worldwide
+                  Denver, CO · Remote-friendly
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <span className="text-primary font-semibold">⏰</span>
+                <Briefcase className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h4 className="font-semibold text-foreground">Availability</h4>
                 <p className="text-muted-foreground">
-                  Open to new opportunities
+                  Nexus Code engagements &amp; full-time roles
                 </p>
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h4 className="font-semibold text-foreground">Follow Me</h4>
+            <h4 className="font-semibold text-foreground">Elsewhere</h4>
             <SocialLinks iconSize="h-6 w-6" />
           </div>
 

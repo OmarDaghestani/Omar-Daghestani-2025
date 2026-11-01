@@ -5,10 +5,13 @@
 export const NAVIGATION_LINKS = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
+  { href: "#projects", label: "Work" },
+  { href: "#experience", label: "Experience" },
   { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
   { href: "#contact", label: "Contact" },
 ] as const;
+
+export const CONTACT_EMAIL = "omar@nexuscodelabs.dev";
 
 export const SOCIAL_LINKS = [
   {
@@ -23,12 +26,12 @@ export const SOCIAL_LINKS = [
   },
   {
     label: "Email",
-    url: "mailto:omar.daghest@gmail.com",
+    url: `mailto:${CONTACT_EMAIL}`,
     icon: "mail",
   },
 ] as const;
 
-export const RESUME_URL = "/Omar-Daghestani-Resume-2025.pdf";
+export const RESUME_URL = "/Omar-Daghestani-Resume-2026.pdf";
 
 export const SCROLL_OFFSET = 5; // rem
 export const SCROLL_DURATION = 1000; // ms

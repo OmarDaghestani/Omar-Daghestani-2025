@@ -34,10 +34,10 @@ const ProjectsSection = dynamic(
   }
 );
 
-const InsightsSection = dynamic(
+const ExperienceSection = dynamic(
   () =>
-    import("@/components/insights-section").then((mod) => ({
-      default: mod.InsightsSection,
+    import("@/components/experience-section").then((mod) => ({
+      default: mod.ExperienceSection,
     })),
   {
     loading: () => (
@@ -82,9 +82,9 @@ export default function Home() {
           <div className="story-divider" aria-hidden="true" />
         </div>
         <AboutSection />
-        <SkillsSection />
         <ProjectsSection />
-        <InsightsSection />
+        <ExperienceSection />
+        <SkillsSection />
         <ContactSection />
       </main>
       <Footer />

@@ -1,232 +1,181 @@
 "use client";
 
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "./ui/carousel";
-import { Eye, ExternalLink, Github } from "lucide-react";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { projects } from "@/lib/projects-data";
+import { Building2, ExternalLink, Github, Lock } from "lucide-react";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { featuredCaseStudy, projects } from "@/lib/projects-data";
 import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+function CaseStudy() {
+  const study = featuredCaseStudy;
+
+  return (
+    <motion.article
+      className="section-surface relative overflow-hidden p-6 sm:p-8 lg:p-10"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={cardVariants}
+    >
+      <div
+        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="relative flex flex-wrap items-center gap-3">
+        <span className="eyebrow rounded-full bg-primary px-3 py-1 text-primary-foreground">
+          Featured case study
+        </span>
+        <span className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Building2 className="h-4 w-4" />
+          <span className="font-medium text-foreground">{study.client}</span>
+          <span className="hidden sm:inline">· {study.clientDescription}</span>
+        </span>
+      </div>
+
+      <div className="relative mt-6 grid gap-8 lg:grid-cols-[3fr_2fr]">
+        <div className="space-y-4">
+          <h3 className="text-balance text-2xl font-bold tracking-tight sm:text-3xl">
+            {study.title}
+          </h3>
+          <p className="text-muted-foreground sm:text-lg">{study.summary}</p>
+        </div>
+        <dl className="grid grid-cols-2 gap-3 self-start">
+          {study.stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-xl border border-border/60 bg-background/40 p-4"
+            >
+              <dd className="text-3xl font-bold tracking-tight text-primary">
+                {stat.value}
+              </dd>
+              <dt className="text-xs uppercase tracking-wide text-muted-foreground">
+                {stat.label}
+              </dt>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <ul className="relative mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {study.highlights.map((item) => (
+          <li
+            key={item.title}
+            className="rounded-xl border border-border/60 bg-background/30 p-5 transition-colors hover:border-primary/40"
+          >
+            <h4 className="mb-2 font-semibold">{item.title}</h4>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {item.description}
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      <div className="relative mt-8 flex flex-col gap-4 border-t border-border/60 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap gap-2">
+          {study.stack.map((tech) => (
+            <Badge
+              key={tech}
+              variant="secondary"
+              className="border-primary/20 bg-primary/10 text-primary"
+            >
+              {tech}
+            </Badge>
+          ))}
+        </div>
+        <p className="flex shrink-0 items-center gap-2 text-xs text-muted-foreground">
+          <Lock className="h-3.5 w-3.5" />
+          Client code is private
+        </p>
+      </div>
+    </motion.article>
+  );
+}
 
 export function ProjectsSection() {
   return (
     <SectionWrapper id="projects">
-      <SectionTitle subtitle="Here are some of my recent projects that showcase my skills in full-stack development, user experience design, and problem-solving.">
-        Featured <span className="text-primary">Projects</span>
+      <SectionTitle
+        eyebrow="Selected work"
+        subtitle="Production client work through Nexus Code, plus open-source projects you can run yourself."
+      >
+        Things I&apos;ve <span className="text-primary">built</span>
       </SectionTitle>
 
-      <Carousel
-        opts={{
-          align: "start",
-          loop: false,
-        }}
-        className="w-full"
-      >
-        <CarouselContent className="-ml-2 md:-ml-4">
-          {projects.map((project, index) => (
-            <CarouselItem
-              key={project.title}
-              className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 h-full"
-            >
-              <div className="p-1 h-full">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div>
-                      <Card className="group overflow-hidden bg-card/50 border-white/10 hover:border-primary/50 transition-colors duration-300 project-card">
-                        <CardContent className="p-0 project-card-content">
-                          <div className="relative overflow-hidden">
-                            <Image
-                              src={project.image}
-                              alt={project.title}
-                              width={800}
-                              height={450}
-                              className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                              priority={index < 2}
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                              <div className="flex items-center gap-2 text-white border border-white/50 rounded-full px-4 py-2">
-                                <Eye className="h-5 w-5" />
-                                <span>View Case Study</span>
-                              </div>
-                            </div>
-                          </div>
-                          <CardHeader className="flex-1 flex flex-col">
-                            <CardTitle className="text-xl font-bold truncate">
-                              {project.title}
-                            </CardTitle>
-                            <CardDescription className="project-card-description text-sm leading-relaxed">
-                              {project.description}
-                            </CardDescription>
-                          </CardHeader>
-                          <CardFooter className="mt-auto">
-                            <div className="flex flex-wrap gap-2">
-                              {project.tags.slice(0, 3).map((tag) => (
-                                <Badge
-                                  key={tag}
-                                  variant="secondary"
-                                  className="bg-primary/10 text-primary border-primary/20 text-xs"
-                                >
-                                  {tag}
-                                </Badge>
-                              ))}
-                            </div>
-                          </CardFooter>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-4xl w-[95vw] sm:w-[90vw] max-h-[90vh] overflow-y-auto bg-background/80 backdrop-blur-2xl border-white/10 text-foreground p-4 sm:p-6">
-                    <DialogHeader className="space-y-3">
-                      <DialogTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-2">
-                        {project.title}
-                      </DialogTitle>
-                      <DialogDescription className="text-sm sm:text-base md:text-lg text-muted-foreground">
-                        {project.description}
-                      </DialogDescription>
-                    </DialogHeader>
+      <CaseStudy />
 
-                    <div className="space-y-4 sm:space-y-6">
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <Badge
-                            key={tag}
-                            variant="secondary"
-                            className="bg-primary/10 text-primary border-primary/20 text-xs"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-
-                      <div className="space-y-3 sm:space-y-4">
-                        <div>
-                          <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">
-                            Problem
-                          </h4>
-                          <p className="text-muted-foreground text-sm sm:text-base">
-                            {project.problem}
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">
-                            My Role
-                          </h4>
-                          <p className="text-muted-foreground text-sm sm:text-base">
-                            {project.role}
-                          </p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">
-                            Key Features
-                          </h4>
-                          <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm sm:text-base">
-                            {project.features.map((feature, index) => (
-                              <li key={index}>{feature}</li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-foreground mb-2 text-sm sm:text-base">
-                            Impact
-                          </h4>
-                          <p className="text-muted-foreground text-sm sm:text-base">
-                            {project.impact}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
-                        <Button
-                          asChild
-                          className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base"
-                        >
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            <ExternalLink className="h-4 w-4 mr-2" />
-                            View Live
-                          </a>
-                        </Button>
-                        <Button
-                          asChild
-                          variant="outline"
-                          className="flex-1 text-sm sm:text-base"
-                        >
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            <Github className="h-4 w-4 mr-2" />
-                            View Code
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+      <h3 className="eyebrow mb-6 mt-16 text-muted-foreground">
+        Open-source projects
+      </h3>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <motion.article
+            key={project.title}
+            className="section-surface group flex flex-col overflow-hidden transition-colors hover:border-primary/40"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={cardVariants}
+          >
+            <div className="relative h-44 overflow-hidden border-b border-border/60 bg-gradient-to-br from-primary/20 via-background to-indigo-500/20">
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={`${project.title} screenshot`}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center">
+                  <span className="text-3xl font-bold tracking-tight text-foreground/80">
+                    {project.title}
+                  </span>
+                </div>
+              )}
+            </div>
+            <div className="flex flex-1 flex-col p-5">
+              <h4 className="mb-2 text-lg font-bold">{project.title}</h4>
+              <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                {project.description}
+              </p>
+              <div className="mb-5 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <Badge key={tag} variant="outline" className="text-xs">
+                    {tag}
+                  </Badge>
+                ))}
               </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-
-        {/* Carousel Navigation with Visual Indicators */}
-        <div className="flex items-center justify-between mt-6 sm:mt-8">
-          <CarouselPrevious className="static sm:absolute sm:left-0 sm:top-1/2 sm:-translate-y-1/2 sm:-translate-x-12" />
-
-          {/* Project Counter and Swipe Indicator */}
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <span className="hidden sm:inline">Project</span>
-              <span className="font-medium">1</span>
-              <span>of</span>
-              <span className="font-medium">{projects.length}</span>
+              <div className="flex gap-3">
+                {project.liveUrl && (
+                  <Button asChild size="sm" className="flex-1">
+                    <a href={project.liveUrl} target="_blank" rel="noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Live
+                    </a>
+                  </Button>
+                )}
+                {project.githubUrl && (
+                  <Button asChild size="sm" variant="outline" className="flex-1">
+                    <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                      <Github className="mr-2 h-4 w-4" />
+                      Code
+                    </a>
+                  </Button>
+                )}
+              </div>
             </div>
-
-            {/* Mobile Swipe Indicator */}
-            <div className="flex items-center gap-1 sm:hidden">
-              <div className="w-1 h-1 bg-muted-foreground rounded-full animate-pulse"></div>
-              <div
-                className="w-1 h-1 bg-muted-foreground rounded-full animate-pulse"
-                style={{ animationDelay: "0.2s" }}
-              ></div>
-              <div
-                className="w-1 h-1 bg-muted-foreground rounded-full animate-pulse"
-                style={{ animationDelay: "0.4s" }}
-              ></div>
-              <span className="text-xs ml-1">Swipe</span>
-            </div>
-          </div>
-
-          <CarouselNext className="static sm:absolute sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-12" />
-        </div>
-      </Carousel>
+          </motion.article>
+        ))}
+      </div>
     </SectionWrapper>
   );
 }

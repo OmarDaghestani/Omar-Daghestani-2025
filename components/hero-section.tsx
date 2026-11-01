@@ -22,40 +22,44 @@ const itemVariants = {
 };
 
 const impactMetrics = [
-  { label: "Years Experience", value: "4+" },
-  { label: "Projects Shipped", value: "15+" },
-  { label: "Core Stack", value: "Next.js / TS" },
+  { label: "Production systems", value: "30" },
+  { label: "Claude workflows live", value: "10+" },
+  { label: "Lines in production", value: "~60K" },
 ];
 
 export function HeroSection() {
-  const handleContactClick = () => {
-    scrollToSection("#contact");
+  const handleWorkClick = () => {
+    scrollToSection("#projects");
   };
 
   return (
-    <section id="home" className="w-full pt-24 md:pt-8 lg:pt-10">
+    <section id="home" className="w-full pt-28 md:pt-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="grid min-h-[calc(100vh-6rem)] grid-cols-1 items-center gap-10 md:grid-cols-2"
+          className="grid min-h-[calc(100vh-7rem)] grid-cols-1 items-center gap-10 md:grid-cols-[1.25fr_1fr]"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
           <div className="space-y-8 text-center md:text-left">
             <motion.div
-              className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-primary"
+              className="eyebrow inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-primary"
               variants={itemVariants}
             >
-              Full-Stack Developer
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              AI &amp; Automation Engineer · Founder, Nexus Code
             </motion.div>
 
             <motion.h1
               className="text-balance text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl"
               variants={itemVariants}
             >
-              I build scalable products with
-              <span className="block bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
-                thoughtful user experiences.
+              I build AI-powered systems
+              <span className="text-gradient block">
+                that run real businesses.
               </span>
             </motion.h1>
 
@@ -63,29 +67,21 @@ export function HeroSection() {
               className="mx-auto max-w-2xl text-lg text-muted-foreground md:mx-0"
               variants={itemVariants}
             >
-              I&apos;m Omar Daghestani, a developer who bridges product strategy,
-              front-end craft, and robust backend engineering to turn ideas into
-              reliable digital experiences.
+              I&apos;m Omar Daghestani. I design, ship, and operate production
+              systems end to end — LLM workflows, AWS infrastructure, CI/CD, and
+              data pipelines — for companies that need automation that holds up
+              on a Monday morning.
             </motion.p>
 
             <motion.div
               className="flex flex-col items-center gap-4 sm:flex-row md:justify-start"
               variants={itemVariants}
             >
-              <Button
-                size="lg"
-                className="group min-w-40"
-                onClick={handleContactClick}
-              >
-                Let&apos;s Work Together
+              <Button size="lg" className="group min-w-40" onClick={handleWorkClick}>
+                See the work
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="min-w-40"
-              >
+              <Button asChild size="lg" variant="outline" className="min-w-40">
                 <a href={RESUME_URL} download>
                   <Download className="w-4 h-4 mr-2" />
                   Download Resume
@@ -93,47 +89,57 @@ export function HeroSection() {
               </Button>
             </motion.div>
 
-            <motion.div
-              className="grid grid-cols-1 gap-3 pt-1 sm:grid-cols-3"
+            <motion.dl
+              className="grid grid-cols-3 gap-3 pt-1"
               variants={itemVariants}
             >
               {impactMetrics.map((metric) => (
                 <div
                   key={metric.label}
-                  className="section-surface px-4 py-3 text-center md:text-left"
+                  className="section-surface px-3 py-3 text-center md:px-4 md:text-left"
                 >
-                  <p className="text-2xl font-bold tracking-tight">{metric.value}</p>
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                  <dd className="text-2xl font-bold tracking-tight md:text-3xl">
+                    {metric.value}
+                  </dd>
+                  <dt className="text-[11px] uppercase tracking-wide text-muted-foreground md:text-xs">
                     {metric.label}
-                  </p>
+                  </dt>
                 </div>
               ))}
-            </motion.div>
+            </motion.dl>
 
-            <motion.div variants={itemVariants}>
+            <motion.div
+              className="flex justify-center md:justify-start"
+              variants={itemVariants}
+            >
               <SocialLinks />
             </motion.div>
           </div>
+
           <motion.div
             className="relative flex items-center justify-center"
             variants={itemVariants}
           >
-            <div className="h-72 w-72 rounded-full bg-primary/10 blur-3xl md:h-96 md:w-96" />
-            <motion.div
-              className="relative rounded-full p-1.5"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            >
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-purple-500 to-pink-500 opacity-90" />
-              <Image
-                src="/icon.jpg"
-                alt="Omar Daghestani"
-                width={400}
-                height={400}
-                className="relative rounded-full border-4 border-background object-cover shadow-2xl"
-                priority
-              />
-            </motion.div>
+            <div className="absolute h-72 w-72 rounded-full bg-primary/15 blur-3xl md:h-96 md:w-96" />
+            <div className="relative">
+              <div className="relative rounded-full p-1.5">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-sky-400 to-indigo-500 opacity-90" />
+                <Image
+                  src="/icon.jpg"
+                  alt="Omar Daghestani"
+                  width={360}
+                  height={360}
+                  className="relative aspect-square h-64 w-64 rounded-full border-4 border-background object-cover shadow-2xl sm:h-80 sm:w-80"
+                  priority
+                />
+              </div>
+              <div className="section-surface absolute -bottom-4 left-1/2 w-max -translate-x-1/2 bg-background/80 px-4 py-2 shadow-xl md:-left-6 md:translate-x-0">
+                <p className="eyebrow text-muted-foreground">Currently</p>
+                <p className="text-sm font-semibold">
+                  Running Iron Buffalo&apos;s automation platform
+                </p>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>

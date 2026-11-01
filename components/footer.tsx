@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Linkedin, Twitter, Code } from "lucide-react";
+import { Github, Linkedin, Mail, Code } from "lucide-react";
+import { CONTACT_EMAIL } from "@/lib/constants";
 
 export function Footer() {
   return (
@@ -8,8 +9,7 @@ export function Footer() {
         <div className="flex items-center gap-2">
           <Code className="w-6 h-6 text-primary" />
           <p className="text-muted-foreground">
-            &copy; {new Date().getFullYear()} Omar Daghestani. All Rights
-            Reserved.
+            &copy; {new Date().getFullYear()} Omar Daghestani · Nexus Code
           </p>
         </div>
         <div className="flex items-center gap-6">
@@ -29,14 +29,13 @@ export function Footer() {
           >
             <Linkedin className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
           </Link>
-          <Link
-            href="https://twitter.com"
-            target="_blank"
-            aria-label="Twitter"
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            aria-label="Email"
             className="focus-ring rounded-md p-1"
           >
-            <Twitter className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
-          </Link>
+            <Mail className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary" />
+          </a>
         </div>
       </div>
     </footer>

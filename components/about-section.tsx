@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
-import { scrollToSection } from "@/lib/scroll-utils";
+import { Bot, Cloud, Workflow } from "lucide-react";
 import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
 
@@ -17,59 +16,76 @@ const textVariants = {
   visible: { y: 0, opacity: 1, transition: { duration: 0.6 } },
 };
 
-export function AboutSection() {
-  const handleContactClick = () => {
-    scrollToSection("#contact");
-  };
+const pillars = [
+  {
+    icon: Bot,
+    title: "LLMs that earn their keep",
+    description:
+      "Claude wired into real workflows — auditing, classification, OCR, reporting — with evaluation behind every prompt.",
+  },
+  {
+    icon: Cloud,
+    title: "Infrastructure I can sleep on",
+    description:
+      "Serverless AWS, least-privilege IAM, and drift detection so nothing changes in production without someone knowing.",
+  },
+  {
+    icon: Workflow,
+    title: "End-to-end ownership",
+    description:
+      "From the first whiteboard sketch to the runbook — I build it, ship it, and stay on the hook for it.",
+  },
+];
 
+export function AboutSection() {
   return (
     <SectionWrapper id="about" background="bg-secondary/30">
-      <SectionTitle>
-        About <span className="text-primary">Me</span>
+      <SectionTitle eyebrow="About">
+        Engineer, operator, <span className="text-primary">founder</span>
       </SectionTitle>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[2fr_3fr]">
         <motion.div
           className="relative flex justify-center"
           variants={imageVariants}
         >
-          <div className="absolute -inset-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 blur-xl opacity-50 group-hover:opacity-75 transition duration-1000 animate-pulse [animation-duration:4s]" />
+          <div className="absolute -inset-2 rounded-2xl bg-gradient-to-br from-primary/40 to-indigo-500/40 blur-xl" />
           <Image
             src="/aboutme.jpg"
-            alt="A portrait of Omar Daghestani, a professional developer"
+            alt="Portrait of Omar Daghestani"
             width={400}
             height={400}
-            className="relative rounded-lg shadow-2xl"
-            priority
+            className="relative rounded-2xl shadow-2xl"
           />
         </motion.div>
 
         <div className="space-y-6 text-lg text-muted-foreground">
           <motion.p variants={textVariants}>
-            My journey into tech began not in a classroom, but with a
-            curiosity-driven dive into the source code of my favorite websites.
-            This passion for deconstructing and understanding digital
-            experiences evolved into a professional drive: to build intuitive,
-            powerful, and elegant solutions to complex problems.
+            I started in support and teaching — helping enterprise SaaS
+            customers at PowerSchool and mentoring 200+ developers at edX. That
+            taught me what breaks in production and how to explain it to the
+            people it breaks for.
           </motion.p>
           <motion.p variants={textVariants}>
-            As a developer, I am a user-centric design advocate with a
-            meticulous attention to detail. I believe the best applications are
-            born from a deep understanding of user needs, translated into clean,
-            scalable, and maintainable code. Whether I&apos;m architecting a
-            backend or polishing a UI, my goal is always to create something
-            that is not just functional, but delightful to use.
+            In 2025 I founded <span className="text-foreground">Nexus Code</span>,
+            an independent AI and automation practice. My flagship engagement
+            is Iron Buffalo Holdings, a multi-shop heavy-truck repair company,
+            where I built and run a 30-system platform that handles their
+            reporting, compliance, commissions, and customer portals. I also
+            support enterprise healthcare infrastructure at Cognizant/TriZetto.
           </motion.p>
-          <motion.p variants={textVariants}>
-            Outside of coding, I&apos;m an avid hiker, a hobby that trains my
-            problem-solving skills on winding trails, and an amateur chef, which
-            fosters creativity and precision—traits I bring to every project.
-          </motion.p>
-          <motion.div variants={textVariants}>
-            <Button size="lg" className="mt-4" onClick={handleContactClick}>
-              Let&apos;s Connect
-            </Button>
-          </motion.div>
+
+          <motion.ul className="grid gap-4 pt-2 sm:grid-cols-3" variants={textVariants}>
+            {pillars.map(({ icon: Icon, title, description }) => (
+              <li key={title} className="section-surface p-4">
+                <Icon className="mb-3 h-6 w-6 text-primary" />
+                <h3 className="mb-1 text-base font-semibold text-foreground">
+                  {title}
+                </h3>
+                <p className="text-sm leading-relaxed">{description}</p>
+              </li>
+            ))}
+          </motion.ul>
         </div>
       </div>
     </SectionWrapper>

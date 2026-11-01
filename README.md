@@ -91,10 +91,9 @@ npm run dev
 │   ├── header.tsx        # Navigation header
 │   ├── hero-section.tsx  # Hero section with prominent name display
 │   ├── about-section.tsx # About section
-│   ├── skills-section.tsx # Skills section with filtering
-│   ├── skills-filter.tsx # Interactive skills filter component
-│   ├── projects-section.tsx # Projects section with carousel
-│   ├── insights-section.tsx # Insights section
+│   ├── projects-section.tsx # Featured case study + open-source projects
+│   ├── experience-section.tsx # Work history timeline and education
+│   ├── skills-section.tsx # Grouped skills and certifications
 │   ├── contact-section.tsx # Contact section with form
 │   ├── footer.tsx        # Footer
 │   ├── custom-cursor.tsx # Custom cursor component
@@ -109,10 +108,11 @@ npm run dev
 │   ├── motion-utils.ts   # Framer Motion utilities
 │   ├── icon-utils.ts     # Icon management
 │   ├── skills-data.ts    # Skills data
-│   ├── projects-data.ts  # Projects data
+│   ├── projects-data.ts  # Case study and projects data
+│   ├── experience-data.ts # Roles and education
 │   └── contact-utils.ts  # Contact form utilities
 ├── public/               # Static assets
-│   ├── Omar-Daghestani-Resume-2025.pdf
+│   ├── Omar-Daghestani-Resume-2026.pdf
 │   └── project-images/
 └── next.config.js        # Next.js configuration with optimizations
 ```
@@ -170,7 +170,7 @@ Update the following files with your information:
 
 ### Assets
 
-- **Resume**: Replace `public/Omar-Daghestani-Resume-2025.pdf`
+- **Resume**: Replace `public/Omar-Daghestani-Resume-2026.pdf`
 - **Images**: Add project images to `public/project-images/`
 - **Icons**: Update icon mappings in `lib/icon-utils.ts`
 
@@ -264,7 +264,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 📞 Contact
 
-- **Email**: omar.daghestani@gmail.com
+- **Email**: omar@nexuscodelabs.dev
 - **LinkedIn**: [Omar Daghestani](https://linkedin.com/in/omar-daghestani)
 - **GitHub**: [@OmarDaghestani](https://github.com/OmarDaghestani)
 - **Portfolio**: [omar-daghestani.com](https://omar-daghestani.com)

@@ -7,6 +7,7 @@ interface SectionTitleProps {
   children: ReactNode;
   className?: string;
   subtitle?: string;
+  eyebrow?: string;
   centered?: boolean;
 }
 
@@ -19,6 +20,7 @@ export function SectionTitle({
   children,
   className = "",
   subtitle,
+  eyebrow,
   centered = true,
 }: SectionTitleProps) {
   return (
@@ -29,7 +31,8 @@ export function SectionTitle({
       viewport={{ once: true }}
       variants={titleVariants}
     >
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+      {eyebrow && <p className="eyebrow mb-3 text-primary">{eyebrow}</p>}
+      <h2 className="text-balance text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
         {children}
       </h2>
       {subtitle && (

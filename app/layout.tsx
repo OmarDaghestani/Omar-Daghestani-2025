@@ -1,6 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ScrollProgressIndicator } from "@/components/scroll-progress-indicator";
@@ -13,22 +13,28 @@ const inter = Inter({
   preload: true,
 });
 
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Omar Daghestani - Full Stack Developer",
+  title: "Omar Daghestani - AI & Automation Engineer",
   description:
-    "Full Stack Developer specializing in React, Node.js, and modern web technologies",
+    "AI and automation engineer and founder of Nexus Code. Production LLM workflows, MCP servers, AWS infrastructure, and CI/CD, built and run end to end.",
   metadataBase: new URL("https://omar-daghestani.com"),
   openGraph: {
-    title: "Omar Daghestani - Full Stack Developer",
+    title: "Omar Daghestani - AI & Automation Engineer",
     description:
-      "Full Stack Developer specializing in React, Node.js, and modern web technologies",
+      "AI and automation engineer and founder of Nexus Code. Production LLM workflows, MCP servers, AWS infrastructure, and CI/CD, built and run end to end.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Omar Daghestani - Full Stack Developer",
+    title: "Omar Daghestani - AI & Automation Engineer",
     description:
-      "Full Stack Developer specializing in React, Node.js, and modern web technologies",
+      "AI and automation engineer and founder of Nexus Code. Production LLM workflows, MCP servers, AWS infrastructure, and CI/CD, built and run end to end.",
   },
   robots: {
     index: true,
@@ -54,7 +60,8 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          inter.variable
+          inter.variable,
+          mono.variable
         )}
       >
         <div className="animated-background noise-texture">
