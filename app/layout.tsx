@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "Omar Daghestani - AI & Automation Engineer",
   description:
     "AI and automation engineer and founder of Nexus Code. Production LLM workflows, MCP servers, AWS infrastructure, and CI/CD, built and run end to end.",
-  metadataBase: new URL("https://omar-daghestani.com"),
+  metadataBase: new URL("https://www.omar-daghestani.com"),
   openGraph: {
     title: "Omar Daghestani - AI & Automation Engineer",
     description:
