@@ -31,7 +31,7 @@ export const roles: Role[] = [
   {
     company: "edX",
     title: "Full Stack Teaching Assistant",
-    period: "Jan 2023 – Jun 2025",
+    period: "Jan 2023 – Oct 2025",
     location: "Remote",
     summary:
       "Mentored 200+ engineers in full-stack development, architecture patterns, systematic debugging, and Git workflows.",
