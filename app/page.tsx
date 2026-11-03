@@ -34,6 +34,21 @@ const ProjectsSection = dynamic(
   }
 );
 
+const TestimonialsSection = dynamic(
+  () =>
+    import("@/components/testimonials-section").then((mod) => ({
+      default: mod.TestimonialsSection,
+    })),
+  {
+    loading: () => (
+      <div className="h-96 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    ),
+    ssr: true,
+  }
+);
+
 const ExperienceSection = dynamic(
   () =>
     import("@/components/experience-section").then((mod) => ({
@@ -83,6 +98,7 @@ export default function Home() {
         </div>
         <AboutSection />
         <ProjectsSection />
+        <TestimonialsSection />
         <ExperienceSection />
         <SkillsSection />
         <ContactSection />

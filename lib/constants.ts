@@ -6,6 +6,7 @@ export const NAVIGATION_LINKS = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#projects", label: "Work" },
+  { href: "#testimonials", label: "Reviews" },
   { href: "#experience", label: "Experience" },
   { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },

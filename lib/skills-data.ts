@@ -79,6 +79,7 @@ export const skillGroups: SkillGroup[] = [
 
 export const certifications = [
   "AWS Certified Cloud Practitioner",
+  "Microsoft Azure Fundamentals",
   "CompTIA Security+",
   "CompTIA Project+",
 ];
