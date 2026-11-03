@@ -48,7 +48,7 @@ export default async function OpengraphImage() {
             {[
               ["30", "production systems"],
               ["10+", "Claude workflows"],
-              ["~60K", "lines in prod"],
+              ["2,400+", "merged PRs"],
             ].map(([value, label]) => (
               <div
                 key={label}

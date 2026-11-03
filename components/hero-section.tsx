@@ -24,7 +24,7 @@ const itemVariants = {
 const impactMetrics = [
   { label: "Production systems", value: "30" },
   { label: "Claude workflows live", value: "10+" },
-  { label: "Lines in production", value: "~60K" },
+  { label: "Merged pull requests", value: "2,400+" },
 ];
 
 export function HeroSection() {

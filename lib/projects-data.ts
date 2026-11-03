@@ -25,7 +25,7 @@ export const featuredCaseStudy: CaseStudy = {
     "Through Nexus Code I architected, shipped, and operate the systems that run Iron Buffalo day to day — revenue reporting, compliance, commissions, and customer portals — with Claude woven into the workflows that used to eat hours of manual work.",
   stats: [
     { value: "30", label: "Production systems" },
-    { value: "~60K", label: "Lines of code" },
+    { value: "2,400+", label: "Merged pull requests" },
     { value: "10+", label: "Claude-powered workflows" },
     { value: "45", label: "Entities exposed via MCP" },
   ],
@@ -33,7 +33,7 @@ export const featuredCaseStudy: CaseStudy = {
     {
       title: "AI in production",
       description:
-        "Claude API integrated into invoice auditing, service-request classification, handwritten-note OCR, and twice-daily AI-written operations briefings.",
+        "Claude API integrated into invoice auditing, service-request classification, handwritten-note OCR, and twice-daily AI-written operations briefings. New audit rules are dry-run on live tickets first: one first run was 69% false positives, traced to two bugs and fixed before anyone saw it.",
     },
     {
       title: "MCP server for the business",
@@ -53,7 +53,7 @@ export const featuredCaseStudy: CaseStudy = {
     {
       title: "Safe-deploy CI/CD",
       description:
-        "GitHub Actions pipelines with deploy gates that harvest out-of-band production edits into pull requests, plus daily drift and job-heartbeat detectors.",
+        "GitHub Actions pipelines with deploy gates that harvest out-of-band production edits into pull requests, plus nine scheduled detectors for drift, unshipped merges, and stalled jobs.",
     },
     {
       title: "Hardened API surface",
