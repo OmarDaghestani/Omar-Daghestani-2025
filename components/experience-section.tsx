@@ -33,7 +33,18 @@ export function ExperienceSection() {
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                 <h3 className="text-lg font-semibold">
                   {role.title}{" "}
-                  <span className="text-primary">· {role.company}</span>
+                  {role.url ? (
+                    <a
+                      href={role.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      · {role.company}
+                    </a>
+                  ) : (
+                    <span className="text-primary">· {role.company}</span>
+                  )}
                 </h3>
                 <p className="eyebrow shrink-0 text-muted-foreground">
                   {role.period}

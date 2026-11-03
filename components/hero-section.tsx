@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { scrollToSection } from "@/lib/scroll-utils";
 import { SocialLinks } from "./social-links";
-import { RESUME_URL } from "@/lib/constants";
+import { NEXUS_URL, RESUME_URL } from "@/lib/constants";
 import { ArrowRight, Download } from "lucide-react";
 
 const containerVariants = {
@@ -50,7 +50,15 @@ export function HeroSection() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              AI &amp; Automation Engineer · Founder, Nexus Code
+              AI &amp; Automation Engineer · Founder,{" "}
+              <a
+                href={NEXUS_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary"
+              >
+                Nexus Code
+              </a>
             </motion.div>
 
             <motion.h1

@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 import { featuredCaseStudy, projects } from "@/lib/projects-data";
 import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
+import { NEXUS_URL } from "@/lib/constants";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -91,10 +92,21 @@ function CaseStudy() {
             </Badge>
           ))}
         </div>
-        <p className="flex shrink-0 items-center gap-2 text-xs text-muted-foreground">
-          <Lock className="h-3.5 w-3.5" />
-          Client code is private
-        </p>
+        <div className="flex shrink-0 flex-col gap-2 sm:items-end">
+          <a
+            href={NEXUS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+          >
+            Built through Nexus Code
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          <p className="flex items-center gap-2 text-xs text-muted-foreground">
+            <Lock className="h-3.5 w-3.5" />
+            Client code is private
+          </p>
+        </div>
       </div>
     </motion.article>
   );

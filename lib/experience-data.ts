@@ -5,6 +5,7 @@ export interface Role {
   location: string;
   summary: string;
   current?: boolean;
+  url?: string;
 }
 
 export const roles: Role[] = [
@@ -16,6 +17,7 @@ export const roles: Role[] = [
     summary:
       "Independent AI & automation practice. Sole engineer from architecture to operations — currently building and running Iron Buffalo's 30-system platform.",
     current: true,
+    url: "https://nexuscodelabs.dev",
   },
   {
     company: "Cognizant / TriZetto",

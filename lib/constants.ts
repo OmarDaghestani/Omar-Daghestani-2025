@@ -12,6 +12,7 @@ export const NAVIGATION_LINKS = [
 ] as const;
 
 export const CONTACT_EMAIL = "omar@nexuscodelabs.dev";
+export const NEXUS_URL = "https://nexuscodelabs.dev";
 
 export const SOCIAL_LINKS = [
   {

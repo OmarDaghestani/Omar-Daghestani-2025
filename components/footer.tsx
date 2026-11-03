@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, Code } from "lucide-react";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { CONTACT_EMAIL, NEXUS_URL } from "@/lib/constants";
 
 export function Footer() {
   return (
@@ -9,7 +9,10 @@ export function Footer() {
         <div className="flex items-center gap-2">
           <Code className="w-6 h-6 text-primary" />
           <p className="text-muted-foreground">
-            &copy; {new Date().getFullYear()} Omar Daghestani · Nexus Code
+            &copy; {new Date().getFullYear()} Omar Daghestani ·{" "}
+            <a href={NEXUS_URL} target="_blank" rel="noreferrer" className="hover:text-primary">
+              Nexus Code
+            </a>
           </p>
         </div>
         <div className="flex items-center gap-6">

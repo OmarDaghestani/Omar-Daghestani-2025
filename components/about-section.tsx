@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Bot, Cloud, Workflow } from "lucide-react";
 import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
+import { NEXUS_URL } from "@/lib/constants";
 
 const imageVariants = {
   hidden: { x: -50, opacity: 0 },
@@ -67,7 +68,16 @@ export function AboutSection() {
             people it breaks for.
           </motion.p>
           <motion.p variants={textVariants}>
-            In 2025 I founded <span className="text-foreground">Nexus Code</span>,
+            In 2025 I founded{" "}
+            <a
+              href={NEXUS_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="text-foreground underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary"
+            >
+              Nexus Code
+            </a>
+            ,
             an independent AI and automation practice. My flagship engagement
             is Iron Buffalo Holdings, a multi-shop heavy-truck repair company,
             where I built and run a 30-system platform that handles their
