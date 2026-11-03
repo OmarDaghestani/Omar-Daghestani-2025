@@ -10,8 +10,8 @@ import { SocialLinks } from "./social-links";
 import { SectionWrapper } from "./section-wrapper";
 import { SectionTitle } from "./section-title";
 import { sendContactEmail, ContactFormData } from "../lib/contact-utils";
-import { CONTACT_EMAIL } from "@/lib/constants";
-import { Briefcase, Mail, MapPin } from "lucide-react";
+import { BOOKING_URL, CONTACT_EMAIL } from "@/lib/constants";
+import { Briefcase, CalendarDays, Mail, MapPin } from "lucide-react";
 
 export function ContactSection() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -234,6 +234,23 @@ export function ContactSection() {
                   className="text-muted-foreground transition-colors hover:text-primary"
                 >
                   {CONTACT_EMAIL}
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <CalendarDays className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground">Book a call</h4>
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Pick a 30-minute slot
                 </a>
               </div>
             </div>

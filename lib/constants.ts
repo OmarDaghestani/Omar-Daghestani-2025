@@ -14,6 +14,7 @@ export const NAVIGATION_LINKS = [
 
 export const CONTACT_EMAIL = "omar@nexuscodelabs.dev";
 export const NEXUS_URL = "https://nexuscodelabs.dev";
+export const BOOKING_URL = "https://calendly.com/omar-daghestani-work/30min";
 
 export const SOCIAL_LINKS = [
   {
